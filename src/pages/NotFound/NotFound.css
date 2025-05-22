@@ -1,0 +1,103 @@
+@font-face {
+    font-family: letterO;
+    src: url(./font/Dynalight-Regular.ttf);
+}
+
+/* body{
+    overflow: hidden;
+} */
+
+.mainBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.errorBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.supermanImg{
+    width: 600px;
+}
+
+span{
+    font-size: 600px;
+    font-weight: bold;
+    font-family: letterO;
+}
+
+.letterImg {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: inline-block;
+}
+
+.letterO {
+    position: absolute;
+    font-size: 800px;
+    font-family: letterO;
+    top: -20px;
+    left: 75px;
+    z-index: 2;
+    margin: 0;
+}
+
+.letterOTop{
+    position: absolute;
+    font-size: 800px;
+    font-family: letterO;
+    top: -20px;
+    left: 75px;
+    z-index: 5;
+    margin: 0;
+    clip-path: inset(0 0 0 70%); /* показує тільки ліву половину */
+}
+
+/* Супермен позаду літери */
+.supermanBehind {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    z-index: 1;
+    transform: scaleX(-1);
+    clip-path: inset(0 50% 0 0); /* показує тільки ліву половину */
+}
+
+.supermanTop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    z-index: 4;
+    transform: scaleX(-1);
+    clip-path: inset(0 0 40% 0); /* показує тільки верхню половину */
+}
+
+/* Супермен поверх літери */
+.supermanFront {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  z-index: 3;
+  transform: scaleX(-1);
+  clip-path: inset(0 0 0 49%); /* показує тільки праву половину */
+}
+
+.title{
+    margin-top: 200px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.oops{
+    line-height: 20px;
+    
+}
