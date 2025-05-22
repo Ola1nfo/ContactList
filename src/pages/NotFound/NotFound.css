@@ -3,16 +3,29 @@
     src: url(./font/Dynalight-Regular.ttf);
 }
 
-/* body{
-    overflow: hidden;
-} */
+body{
+    background: linear-gradient(270deg, #d1f4f9, #cfdaf9, #e6ceff);
+    background-size: 600% 600%;
+    animation: backgroundFlow 15s ease infinite;
+}
+
+@keyframes backgroundFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 .mainBlock{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
 }
 
 .errorBlock{
@@ -22,49 +35,49 @@
 }
 
 .supermanImg{
-    width: 600px;
+    width: 300px;
 }
 
 span{
-    font-size: 600px;
+    font-size: 300px;
     font-weight: bold;
     font-family: letterO;
 }
 
 .letterImg {
     position: relative;
-    width: 600px;
-    height: 600px;
+    width: 300px;
+    height: 300px;
     display: inline-block;
 }
 
 .letterO {
     position: absolute;
-    font-size: 800px;
+    font-size: 400px;
     font-family: letterO;
-    top: -20px;
-    left: 75px;
+    top: -60px;
+    left: 30px;
     z-index: 2;
     margin: 0;
 }
 
 .letterOTop{
     position: absolute;
-    font-size: 800px;
+    font-size: 400px;
     font-family: letterO;
-    top: -20px;
-    left: 75px;
+    top: -60px;
+    left: 30px;
     z-index: 5;
     margin: 0;
-    clip-path: inset(0 0 0 70%); /* показує тільки ліву половину */
+    clip-path: inset(0 0 0 70%); /* показує тільки верхню половину */
 }
 
 /* Супермен позаду літери */
 .supermanBehind {
     position: absolute;
-    top: 0;
+    top: -60px;
     left: 0;
-    width: 600px;
+    width: 300px;
     z-index: 1;
     transform: scaleX(-1);
     clip-path: inset(0 50% 0 0); /* показує тільки ліву половину */
@@ -72,32 +85,79 @@ span{
 
 .supermanTop{
     position: absolute;
-    top: 0;
+    top: -60px;
     left: 0;
-    width: 600px;
+    width: 300px;
     z-index: 4;
     transform: scaleX(-1);
-    clip-path: inset(0 0 40% 0); /* показує тільки верхню половину */
+    clip-path: inset(0 0 35% 0); /* показує тільки верхню половину */
 }
 
 /* Супермен поверх літери */
 .supermanFront {
   position: absolute;
-  top: 0;
+  top: -60px;
   left: 0;
-  width: 600px;
+  width: 300px;
   z-index: 3;
   transform: scaleX(-1);
   clip-path: inset(0 0 0 49%); /* показує тільки праву половину */
 }
 
-.title{
-    margin-top: 200px;
+.title {
+    margin: 0 auto;
     text-align: center;
-    font-size: 40px;
+    color: #333;
 }
 
-.oops{
-    line-height: 20px;
-    
+.titleText {
+    margin-bottom: 20px;
+}
+
+.oops {
+    margin: 0;
+    font-size: 72px;
+    color: #ff0000;
+    font-weight: bold;
+    animation: bounce 1.2s infinite;
+}
+
+.text1 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.text2 {
+    font-size: 20px;
+    color: #555;
+}
+
+.text3 {
+    font-size: 16px;
+    color: #666;
+    margin-top: 30px;
+}
+
+.text3 strong {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #2a85ff;
+    color: #fff;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.text3 strong:hover {
+    background: #1a5fd1;
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 2px 2px 0 #000;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
