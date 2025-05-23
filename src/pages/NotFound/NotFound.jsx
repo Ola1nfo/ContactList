@@ -1,9 +1,18 @@
 import superman from '../NotFound/img/superman.gif'
+import clouds from '../NotFound/img/clouds.png'
 import './NotFound.css'
 
 export default function NotFound() {
     return(
         <div className='mainBlock'>
+            <div className="sky">
+                <img className='cloud cloud1' src={clouds} alt="clouds" />
+                <img className='cloud cloud2' src={clouds} alt="clouds" />
+                <img className='cloud cloud3' src={clouds} alt="clouds" />
+                <img className='cloud cloud4' src={clouds} alt="clouds" />
+                <img className='cloud cloud5' src={clouds} alt="clouds" />
+                <img className='cloud cloud6' src={clouds} alt="clouds" />
+            </div>
             <div className='errorBlock'>
                 <span>4</span>
                 <div className='letterImg'>

@@ -3,10 +3,63 @@
     src: url(./font/Dynalight-Regular.ttf);
 }
 
-body{
-    background: linear-gradient(270deg, #d1f4f9, #cfdaf9, #e6ceff);
-    background-size: 600% 600%;
-    animation: backgroundFlow 15s ease infinite;
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.sky {
+    position: relative;
+    width: 100%;
+}
+
+.cloud {
+    position: absolute;
+    width: 300px;
+    animation: moveClouds 60s linear infinite;
+    animation-fill-mode: both;
+    animation-play-state: running;
+}
+
+.cloud1 {
+    top: 400px;
+    z-index: 10;
+    animation-delay: -10s;
+}
+
+.cloud2 {
+    animation-delay: -20s;
+}
+
+.cloud3 {
+    top: 250px;
+    animation-delay: -35s;
+}
+
+.cloud4 {
+    top: 400px;
+    z-index: 10;
+    animation-delay: -40s;
+}
+
+.cloud5 {
+    animation-delay: -55s;
+}
+
+.cloud6 {
+    top: 250px;
+    animation-delay: -60s;
+}
+
+@keyframes moveClouds {
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes backgroundFlow {
@@ -22,10 +75,14 @@ body{
 }
 
 .mainBlock{
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background: linear-gradient(270deg, #d1f4f9, #cfdaf9, #e6ceff);
+    background-size: 600% 600%;
+    animation: backgroundFlow 15s ease infinite;
 }
 
 .errorBlock{
