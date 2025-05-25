@@ -197,6 +197,7 @@ span{
 
 .text3 strong {
     display: inline-block;
+    font-size: 20px;
     padding: 4px 8px;
     background: #2a85ff;
     color: #fff;
@@ -210,6 +211,11 @@ span{
     box-shadow: 2px 2px 0 #000;
 }
 
+.link{
+    text-decoration: none;
+    color: #fff;
+}
+
 @keyframes bounce {
     0%, 100% {
         transform: translateY(0px);
@@ -217,4 +223,8 @@ span{
     50% {
         transform: translateY(-8px);
     }
+}
+
+.funny{
+    width: 30px;
 }
