@@ -1,8 +1,9 @@
 import './AddContact.scss'
 import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema } from 'formik'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
+import { IMaskInput } from 'react-imask'
 
 export default function AddContact() {
     const navigate = useNavigate()
@@ -15,13 +16,13 @@ export default function AddContact() {
         email: '',
         avatar: '',
         gender: '',
-        atatus: '',
+        status: '',
         favorite: ''
     }
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required').min(2, 'Min 2 symbols').max(10, 'Max 10 symbols'),
-        lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(10, 'Max 10 symbols'),
+        lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(15, 'Max 15 symbols'),
         phone: Yup.string().required('Phone is required'),
         email: Yup.string().email('Invalid email').required('Email is required'),
         avatar: Yup.string().required('Avatar is required'),
@@ -37,57 +38,73 @@ export default function AddContact() {
 
     return(
         <div className="container">
-            <div className="modal-content addPage rounded shadow">
+            <div className="modal-content addPage">
                 <div className="modal-header">
-                    <h1 className='text-center'>Add new contact</h1>
+                    <h1 className='title'>Add new contact</h1>
                 </div>
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmin}>
                     {({isSubmitting}) => (
                         <Form>
-                            <div className='mb-5'>
-                                <label htmlFor="firstName">First name</label>
-                                <Field type='text' name='firstName' id='firstName'/>
-                                <ErrorMessage name='firstName' component='p' className='text-danger position-absolute'/>
+                            <div className="row">
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <Field type='text' name='firstName' id='firstName' placeholder='Enter your first name' autoComplete="new-password"/>
+                                    <ErrorMessage name='firstName' component='p' className='error'/>
+                                </div>
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <Field type='text' name='lastName' id='lastName' placeholder='Enter your last name' autoComplete="new-password"/>
+                                    <ErrorMessage name='lastName' component='p' className='error'/>
+                                </div>
                             </div>
-                            <div className='mb-5'>
-                                <label htmlFor="lastName">Last name</label>
-                                <Field type='text' name='lastName' id='lastName'/>
-                                <ErrorMessage name='lastName' component='p' className='text-danger'/>
+                            <div className="row">
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <label htmlFor="phone">Phone</label>
+                                    <Field name="phone">
+                                        {({ field, form }) => (
+                                            <IMaskInput
+                                            {...field}
+                                            mask="+{38} (000) 000-00-00"
+                                            definitions={{ '0': /[0-9]/ }}
+                                            unmask={false}
+                                            placeholder="+38 (0__) ___-__-__"
+                                            onAccept={(value) => form.setFieldValue(field.name, value)}
+                                            id="phone"
+                                            />
+                                        )}
+                                    </Field>
+                                    <ErrorMessage name='phone' component='p' className='error'/>
+                                </div>
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <label htmlFor="email">Email</label>
+                                    <Field type='text' name='email' id='email' autoComplete="off"/>
+                                    <ErrorMessage name='email' component='p' className='error'/>
+                                </div>
                             </div>
-                            <div className='mb-5'>
-                                <label htmlFor="phone">Phone</label>
-                                <Field type='text' name='phone' id='phone'/>
-                                <ErrorMessage name='phone' component='p' className='text-danger'/>
-                            </div>
-                            <div className='mb-5'>
-                                <label htmlFor="email">Email</label>
-                                <Field type='text' name='email' id='email'/>
-                                <ErrorMessage name='email' component='p' className='text-danger'/>
-                            </div>
-                            <div className='mb-5'>
+                            <div className='mb-5 col-12'>
                                 <label htmlFor="avatar">Avatar</label>
                                 <Field type='text' name='avatar' id='avatar'/>
-                                <ErrorMessage name='avatar' component='p' className='text-danger'/>
+                                <ErrorMessage name='avatar' component='p' className='error'/>
                             </div>
-                            <div className='mb-5'>
-                                <label htmlFor="gender">Gender</label>
-                                <Field as='select' type='text' name='gender'>
-                                    <option value="">Choose gender</option>
-                                    <option value="men">Men</option>
-                                    <option value="women">Women</option>
-                                </Field>
-                                <ErrorMessage name='gender' component='p' className='text-danger'/>
-                            </div>
-                            <div className='mb-5'>
-                                <label htmlFor="status">Status</label>
-                                <Field as='select' name='status'>
-                                    <option value="">Choose gender</option>
-                                    <option value="work">Work</option>
-                                    <option value="family">Family</option>
-                                    <option value="friends">Friends</option>
-                                    <option value="others">Others</option>
-                                </Field>
-                                <ErrorMessage name='status' component='p' className='text-danger'/>
+                            <div className="row">
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <label htmlFor="gender">Gender</label>
+                                    <Field as='select' type='text' name='gender' id='gender'>
+                                        <option value="">Choose gender</option>
+                                        <option value="men">Men</option>
+                                        <option value="women">Women</option>
+                                    </Field>
+                                    <ErrorMessage name='gender' component='p' className='error'/>
+                                </div>
+                                <div className='mb-5 col-12 col-md-6'>
+                                    <label htmlFor="status">Status</label>
+                                    <Field as='select' name='status' id='status'>
+                                        <option value="">Choose status</option>
+                                        <option value="work">Work</option>
+                                        <option value="family">Family</option>
+                                        <option value="friends">Friends</option>
+                                        <option value="others">Others</option>
+                                    </Field>
+                                    <ErrorMessage name='status' component='p' className='error'/>
+                                </div>
                             </div>
                             <div className='mb-5'>
                                 <label htmlFor="favorite">Favorite</label>
