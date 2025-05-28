@@ -66,4 +66,47 @@
     label{
         display: block;
     }
+
+    option{
+        color: #b5179e;
+        background-color: #f3e8ff;
+    }
+
+    .favorite{
+        display: inline;
+    }
+
+    .checkbox{
+        display: none;
+    }
+
+    .imgFavorite{
+        width: 30px;
+        transition: transform 0.2s ease;
+        margin-left: 5px;
+    }
+
+    .imgFavorite:hover{
+        transform: scale(1.2);
+    }
+    
+    .addBtn{
+        background-color: #6c63ff;
+        color: #fff;
+        padding: 7px 50px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+    }
+
+    .addBtn:hover {
+        background-color: #8477ff;
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
+    }
 }

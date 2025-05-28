@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
 import { IMaskInput } from 'react-imask'
 
+import heardFalse from './img/heafdFalse.png'
+import heardTrue from './img/heafdTrue.png'
+
 export default function AddContact() {
     const navigate = useNavigate()
 
@@ -23,7 +26,7 @@ export default function AddContact() {
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('First Name is required').min(2, 'Min 2 symbols').max(10, 'Max 10 symbols'),
         lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(15, 'Max 15 symbols'),
-        phone: Yup.string().required('Phone is required'),
+        phone: Yup.string().required('Phone is required').min(19, 'Min 19 symbols'),
         email: Yup.string().email('Invalid email').required('Email is required'),
         avatar: Yup.string().required('Avatar is required'),
         gender: Yup.string().oneOf(['men', 'women'], 'Invalid gender').required('Gender is required'),
@@ -31,8 +34,7 @@ export default function AddContact() {
         favorite: Yup.boolean()
     })
 
-    const handleSubmin = (values) => {
-        console.log(values);
+    const handleSubmit = (values) => {
         navigate ('/')
     }
 
@@ -42,8 +44,8 @@ export default function AddContact() {
                 <div className="modal-header">
                     <h1 className='title'>Add new contact</h1>
                 </div>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmin}>
-                    {({isSubmitting}) => (
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                    {({isSubmitting, values, setFieldValue}) => (
                         <Form>
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
@@ -62,7 +64,7 @@ export default function AddContact() {
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
                                     <label htmlFor="phone">Phone</label>
-                                    <Field name="phone">
+                                    <Field name="phone" >
                                         {({ field, form }) => (
                                             <IMaskInput
                                             {...field}
@@ -70,6 +72,7 @@ export default function AddContact() {
                                             definitions={{ '0': /[0-9]/ }}
                                             unmask={false}
                                             placeholder="+38 (0__) ___-__-__"
+                                            autoComplete="new-password"
                                             onAccept={(value) => form.setFieldValue(field.name, value)}
                                             id="phone"
                                             />
@@ -121,10 +124,12 @@ export default function AddContact() {
                                 </div>
                             </div>
                             <div className='mb-2'>
-                                <label htmlFor="favorite">Favorite</label>
-                                <Field type='checkbox' name='favorite'/>
+                                <label className='favorite' htmlFor="favorite" onClick={() => setFieldValue('favorite', !values.favorite)}>Favorite
+                                    {values.favorite ? (<img className='imgFavorite' src={heardTrue} alt="Favorite" />) : (<img className='imgFavorite' src={heardFalse} alt="Not favorite" />)}
+                                </label>
+                                <Field type='checkbox' name='favorite' className='checkbox' checked={values.favorite} onChange={() => setFieldValue('favorite', !values.favorite)} />
                             </div>
-                            <button type='submit' className='btn btn-primary btn-lg' disabled={isSubmitting}>Add</button>
+                            <button type='submit' className='addBtn' disabled={isSubmitting}>Add</button>
                         </Form>
                     )}
                 </Formik>
