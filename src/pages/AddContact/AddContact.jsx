@@ -8,7 +8,7 @@ import { IMaskInput } from 'react-imask'
 import heardFalse from './img/heafdFalse.png'
 import heardTrue from './img/heafdTrue.png'
 
-export default function AddContact() {
+export default function AddContact({ addNewContact }) {
     const navigate = useNavigate()
 
     const initialValues = {
@@ -36,6 +36,7 @@ export default function AddContact() {
 
     const handleSubmit = (values) => {
         console.log(values);
+        addNewContact(values)
         navigate ('/')
     }
 
@@ -93,7 +94,7 @@ export default function AddContact() {
                             </div>
                             <div className='mb-2 col-12'>
                                 <label htmlFor="avatar">Avatar</label>
-                                <Field type='text' name='avatar' id='avatar'/>
+                                <Field type='number' max={99} min={0} name='avatar' id='avatar'/>
                                 <div className="error-wrapper">
                                     <ErrorMessage name='avatar' component='p' className='error'/>
                                 </div>
