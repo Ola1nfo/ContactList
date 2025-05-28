@@ -110,3 +110,13 @@
         box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
     }
 }
+
+@media screen and (max-width: 768px){
+    .addPage {
+        background-color: #f3e8ff;
+        color: #2d334a;
+        width: 500px;
+        height: 900px;
+        border-radius: 20%;
+    }
+}
