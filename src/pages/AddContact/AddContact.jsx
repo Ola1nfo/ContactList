@@ -46,17 +46,21 @@ export default function AddContact() {
                     {({isSubmitting}) => (
                         <Form>
                             <div className="row">
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <Field type='text' name='firstName' id='firstName' placeholder='Enter your first name' autoComplete="new-password"/>
-                                    <ErrorMessage name='firstName' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='firstName' component='p' className='error'/>
+                                    </div>
                                 </div>
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <Field type='text' name='lastName' id='lastName' placeholder='Enter your last name' autoComplete="new-password"/>
-                                    <ErrorMessage name='lastName' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='lastName' component='p' className='error'/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <label htmlFor="phone">Phone</label>
                                     <Field name="phone">
                                         {({ field, form }) => (
@@ -71,30 +75,38 @@ export default function AddContact() {
                                             />
                                         )}
                                     </Field>
-                                    <ErrorMessage name='phone' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='phone' component='p' className='error'/>
+                                    </div>
                                 </div>
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <label htmlFor="email">Email</label>
                                     <Field type='text' name='email' id='email' autoComplete="off"/>
-                                    <ErrorMessage name='email' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='email' component='p' className='error'/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='mb-5 col-12'>
+                            <div className='mb-2 col-12'>
                                 <label htmlFor="avatar">Avatar</label>
                                 <Field type='text' name='avatar' id='avatar'/>
-                                <ErrorMessage name='avatar' component='p' className='error'/>
+                                <div className="error-wrapper">
+                                    <ErrorMessage name='avatar' component='p' className='error'/>
+                                </div>
                             </div>
                             <div className="row">
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <label htmlFor="gender">Gender</label>
                                     <Field as='select' type='text' name='gender' id='gender'>
                                         <option value="">Choose gender</option>
                                         <option value="men">Men</option>
                                         <option value="women">Women</option>
                                     </Field>
-                                    <ErrorMessage name='gender' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='gender' component='p' className='error'/>
+                                    </div>
                                 </div>
-                                <div className='mb-5 col-12 col-md-6'>
+                                <div className='mb-2 col-12 col-md-6'>
                                     <label htmlFor="status">Status</label>
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
@@ -103,10 +115,12 @@ export default function AddContact() {
                                         <option value="friends">Friends</option>
                                         <option value="others">Others</option>
                                     </Field>
-                                    <ErrorMessage name='status' component='p' className='error'/>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='status' component='p' className='error'/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='mb-5'>
+                            <div className='mb-2'>
                                 <label htmlFor="favorite">Favorite</label>
                                 <Field type='checkbox' name='favorite'/>
                             </div>

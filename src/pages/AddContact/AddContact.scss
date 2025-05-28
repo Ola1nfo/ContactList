@@ -39,14 +39,18 @@
         box-shadow: 0 0 8px rgba(255, 200, 221, 0.5);
     }
 
-    .error{
-        margin-left: 10px;
-        color: #b5179e;
-        border-radius: 10px;
-        max-width: 200px;
-        font-style: italic;
-        animation: slideDownFadeIn 0.7s ease forwards;
+    .error-wrapper {
+        min-height: 25px;
+        
     }
+
+    .error {
+        font-size: 14px;
+        font-style: italic;
+        color: #b5179e;
+        animation: slideDownFadeIn 0.7s ease forwards ;
+    }
+
 
     @keyframes slideDownFadeIn {
         0% {
