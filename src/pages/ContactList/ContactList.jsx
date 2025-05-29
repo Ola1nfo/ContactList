@@ -1,7 +1,7 @@
 import ContactItem from "../../components/ContactItem/ContactItem"
 import SideBar from "../../components/SideBar/SideBar"
 
-import { useNavigate} from  'react-router-dom'
+import { useNavigate} from  'react-router'
 
 
 export default function ContactList({ stor, deleteContact }) {

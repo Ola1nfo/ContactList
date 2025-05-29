@@ -18,7 +18,7 @@ function App() {
         lastName: 'Romanovska',
         phone: '+38 (096) 901-88-12',
         email: 'Romanovska@gmail.com',
-        avatar: 5,
+        avatar: 'woman',
         gender: 'women',
         status: 'work',
         favorite: 'true'

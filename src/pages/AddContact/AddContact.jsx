@@ -17,7 +17,6 @@ export default function AddContact({ addNewContact }) {
         lastName: '',
         phone: '',
         email: '',
-        avatar: '',
         gender: '',
         status: '',
         favorite: ''
@@ -28,7 +27,6 @@ export default function AddContact({ addNewContact }) {
         lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(15, 'Max 15 symbols'),
         phone: Yup.string().required('Phone is required').min(19, 'More symbols'),
         email: Yup.string().email('Invalid email').required('Email is required'),
-        avatar: Yup.string().required('Avatar is required'),
         gender: Yup.string().oneOf(['men', 'women'], 'Invalid gender').required('Gender is required'),
         status: Yup.string().oneOf(['work', 'family', 'friends', 'others']).required('Status is required'),
         favorite: Yup.boolean()
@@ -90,13 +88,6 @@ export default function AddContact({ addNewContact }) {
                                     <div className="error-wrapper">
                                          <ErrorMessage name='email' component='p' className='error'/>
                                     </div>
-                                </div>
-                            </div>
-                            <div className='mb-2 col-12'>
-                                <label htmlFor="avatar">Avatar</label>
-                                <Field type='number' max={99} min={0} name='avatar' id='avatar'/>
-                                <div className="error-wrapper">
-                                    <ErrorMessage name='avatar' component='p' className='error'/>
                                 </div>
                             </div>
                             <div className="row">
