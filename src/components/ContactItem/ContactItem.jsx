@@ -1,4 +1,4 @@
-export default function ContactItem({ stor, deleteContact}) {
+export default function ContactItem({ stor, deleteContact, editContact}) {
     console.log(stor);
     return(
         <div>
@@ -12,6 +12,7 @@ export default function ContactItem({ stor, deleteContact}) {
                         <p>{contact.status}</p>
                     </div>
                     <button onClick={() => deleteContact(contact.id)}>Delete</button>
+                    <button onClick={() => editContact(contact.id)}>Edit</button>
                 </div>
             ))}
         </div>

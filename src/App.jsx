@@ -1,6 +1,6 @@
 import './App.css'
 
-import {BrowserRouter as Router, Routes, Route} from 'react-router'
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router'
 import { useState } from 'react'
 
 import ContactList from './pages/ContactList/ContactList'
@@ -56,15 +56,13 @@ function App() {
     setStor(prevStor => prevStor.filter(contact => contact.id !== id))
   }
 
-
-
   return (
     <Router>
       <Header/>
       <Routes>
         <Route path='/' element={<ContactList stor={stor} deleteContact={deleteContact}/>}/>
         <Route path='/add-contact' element={<AddContact addNewContact={handleNewContact}/>}/>
-        <Route path='/edit-contact' element={<EditContact/>}/>
+        <Route path='/edit-contact/:id' element={<EditContact/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </Router>
