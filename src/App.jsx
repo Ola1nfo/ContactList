@@ -25,13 +25,13 @@ function App() {
       },
       {
         id: 'fcf0414f-add4-4891-8651-70139611d246',
-        firstName: 'Ola',
-        lastName: 'Romanovska',
+        firstName: 'Bob',
+        lastName: 'Robertson',
         phone: '+38 (096) 901-88-12',
         email: 'Romanovska@gmail.com',
         avatar: 5,
-        gender: 'women',
-        status: 'work',
+        gender: 'men',
+        status: 'family',
         favorite: 'true'
       },
       {
