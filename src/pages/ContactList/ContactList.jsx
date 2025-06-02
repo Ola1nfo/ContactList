@@ -11,10 +11,10 @@ export default function ContactList({ stor, deleteContact }) {
     }
 
     return(
-        <div className="container rounded">
+        <div className="container rounded bg-white shadow-lg">
             <div className="row">
                 <div className="col-3">
-                    <SideBar/>
+                    <SideBar stor={stor}/>
                 </div>
                 <div className="col-9">
                     <ContactItem stor={stor} deleteContact={deleteContact} editContact={editContact}/>

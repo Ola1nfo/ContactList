@@ -1,6 +1,6 @@
 import './AddContact.scss'
-import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema } from 'formik'
+import { contactValidationSchema } from '../../Validation'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
 import { IMaskInput } from 'react-imask'
@@ -22,16 +22,6 @@ export default function AddContact({ addNewContact }) {
         favorite: ''
     }
 
-    const validationSchema = Yup.object().shape({
-        firstName: Yup.string().required('First Name is required').min(2, 'Min 2 symbols').max(10, 'Max 10 symbols'),
-        lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(15, 'Max 15 symbols'),
-        phone: Yup.string().required('Phone is required').min(19, 'More symbols'),
-        email: Yup.string().email('Invalid email').required('Email is required'),
-        gender: Yup.string().oneOf(['men', 'women'], 'Invalid gender').required('Gender is required'),
-        status: Yup.string().oneOf(['work', 'family', 'friends', 'others']).required('Status is required'),
-        favorite: Yup.boolean()
-    })
-
     const handleSubmit = (values) => {
         console.log(values);
         addNewContact(values)
@@ -41,12 +31,10 @@ export default function AddContact({ addNewContact }) {
     return(
         <div className="container">
             <div className="modal-content addPage">
-                <div className="modal-header">
-                    <h1 className='title'>Add new contact</h1>
-                </div>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                <Formik initialValues={initialValues} validationSchema={contactValidationSchema} onSubmit={handleSubmit}>
                     {({isSubmitting, values, setFieldValue}) => (
                         <Form>
+                            <h1 className='title'>Add new contact</h1>
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
                                     <Field type='text' name='firstName' id='firstName' placeholder='Enter your first name' autoComplete="new-password"/>
@@ -109,6 +97,7 @@ export default function AddContact({ addNewContact }) {
                                         <option value="work">Work</option>
                                         <option value="family">Family</option>
                                         <option value="friends">Friends</option>
+                                        <option value="friends">Privat</option>
                                         <option value="others">Others</option>
                                     </Field>
                                     <div className="error-wrapper">

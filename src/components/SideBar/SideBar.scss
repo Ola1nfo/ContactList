@@ -1,0 +1,65 @@
+.container {
+  padding: 20px;
+  background-color: #f3e8ff;
+  color: #2d334a;
+
+  .contacts-labels {
+    .fs-4 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #6c63ff; 
+      margin-bottom: 40px;
+    }
+
+    .list {
+      .d-flex {
+        padding: 12px 20px;
+        border-radius: 12px;
+        background-color: #fff;
+        border: 2px solid #cdb4db;
+        color: #2d334a;
+        font-weight: 500;
+        margin-bottom: 15px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: scale(1.02);
+          border: 2px solid #ffc8dd;
+          cursor: pointer;
+        }
+
+        div {
+          font-size: 18px;
+        }
+
+        span {
+          font-weight: bold;
+          color: #b5179e;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 12px;
+
+    .contacts-labels {
+      .fs-4 {
+        font-size: 22px;
+      }
+
+      .list {
+        .d-flex {
+          flex-direction: column;
+          align-items: flex-start;
+
+          span {
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+  }
+}
