@@ -1,5 +1,5 @@
 import './AddContact.scss'
-import { Formik, Form, Field, ErrorMessage, validateYupSchema } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { contactValidationSchema } from '../../Validation'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
@@ -29,7 +29,7 @@ export default function AddContact({ addNewContact }) {
     }
 
     return(
-        <div className="container">
+        <div className="containerAddContact">
             <div className="modal-content addPage">
                 <Formik initialValues={initialValues} validationSchema={contactValidationSchema} onSubmit={handleSubmit}>
                     {({isSubmitting, values, setFieldValue}) => (

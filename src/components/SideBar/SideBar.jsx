@@ -20,40 +20,40 @@ export default function SideBar({ stor }) {
 
 
     return(
-        <aside className="container border-end">
+        <aside className="container">
             <div className="row">
                 <div className="col-12">
                     <div className="contacts-labels">
-                        <div className="fs-4 mb-5 mt-4">
+                        <div className="fs-4 mb-5 mt-4 allContact">
                             All contacts: <span className="fs-5">{totalContacts}</span>
                         </div>
                         <div className="list fs-5">
-                            <div className="d-flex justify-content-between mb-3">
-                                <div className="">
+                            <div className="listItem d-flex justify-content-between mb-3">
+                                <div>
                                     Work
                                 </div>
                                 <span className="fs-5">{statusCounts.work}</span>
                             </div>
-                            <div className="d-flex justify-content-between mb-3">
-                                <div className="">
+                            <div className="listItem d-flex justify-content-between mb-3">
+                                <div>
                                     Family
                                 </div>
                                 <span className="fs-5">{statusCounts.family}</span>
                             </div>
-                            <div className="d-flex justify-content-between mb-3">
-                                <div className="">
+                            <div className="listItem d-flex justify-content-between mb-3">
+                                <div>
                                     Friends
                                 </div>
                                 <span className="fs-5">{statusCounts.friends}</span>
                             </div>
-                            <div className="d-flex justify-content-between mb-3">
-                                <div className="">
+                            <div className="listItem d-flex justify-content-between mb-3">
+                                <div>
                                     Private
                                 </div>
                                 <span className="fs-5">{statusCounts.private}</span>
                             </div>
-                            <div className="d-flex justify-content-between mb-3">
-                                <div className="">
+                            <div className="listItem d-flex justify-content-between mb-3">
+                                <div>
                                     Others
                                 </div>
                                 <span className="fs-5">{statusCounts.others}</span>
