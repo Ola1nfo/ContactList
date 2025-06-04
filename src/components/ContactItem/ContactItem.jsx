@@ -4,7 +4,6 @@ import womenImg from './img/woman.png'
 import menImg from './img/man.png'
 
 export default function ContactItem({ stor, deleteContact, editContact}) {
-    console.log(stor);
     return(
         <div className='containerBlock'>
             {stor.map(contact => (
