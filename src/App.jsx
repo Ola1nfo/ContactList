@@ -36,8 +36,8 @@ function App() {
       },
       {
         id: 'fcf0414f-add4-5891-8651-70139511d246',
-        firstName: 'Ola',
-        lastName: 'Romanovska',
+        firstName: 'Liz',
+        lastName: 'Jonson',
         phone: '+38 (096) 901-88-12',
         email: 'Romanovska@gmail.com',
         avatar: 5,
