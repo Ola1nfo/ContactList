@@ -10,7 +10,7 @@ import heardTrue from '../AddContact/img/heafdTrue.png'
 export default function EditContact({stor, updateContact}) {
     const { id } = useParams()
     const navigate = useNavigate()
-    const contact = stor.find(con => con.id === id)
+    const contact = stor.contacts.find(con => con.id === id)
 
     const initialValues = {
         id: contact.id,

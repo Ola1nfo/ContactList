@@ -10,64 +10,151 @@ import NotFound from './pages/NotFound/NotFound'
 import Header from './components/Header/Header'
 
 function App() {
-  const [stor, setStor] = useState(
-    [
-      {
-        id: 'fcf0414f-add4-4891-8651-70139511d246',
-        firstName: 'Ola',
-        lastName: 'Romanovska',
-        phone: '+38 (096) 901-88-12',
-        email: 'Romanovska@gmail.com',
-        avatar: 'woman',
-        gender: 'women',
-        status: 'work',
-        favorite: 'true'
-      },
-      {
-        id: 'fcf0414f-add4-4891-8651-70139611d246',
-        firstName: 'Bob',
-        lastName: 'Robertson',
-        phone: '+38 (096) 901-88-12',
-        email: 'Romanovska@gmail.com',
-        avatar: 5,
-        gender: 'men',
-        status: 'family',
-        favorite: 'true'
-      },
-      {
-        id: 'fcf0414f-add4-5891-8651-70139511d246',
-        firstName: 'Liz',
-        lastName: 'Jonson',
-        phone: '+38 (096) 901-88-12',
-        email: 'Romanovska@gmail.com',
-        avatar: 5,
-        gender: 'women',
-        status: 'work',
-        favorite: 'true'
-      }
-    ]
-  )
+  const [stor, setStor] = useState({
+    contacts: 
+      [
+        {
+          id: "1a2b3c4d-0001-4a2f-89d3-bb11a111a111",
+          firstName: "Anna",
+          lastName: "Ivanova",
+          phone: "+380631234567",
+          email: "anna.ivanova@gmail.com",
+          avatar: 1,
+          gender: "women",
+          status: "friends",
+          favorite: false,
+        },
+        {
+          id: "1a2b3c4d-0002-4a2f-89d3-bb11a111a112",
+          firstName: "Dmytro",
+          lastName: "Kozlov",
+          phone: "+380991122334",
+          email: "d.kozlov@example.com",
+          avatar: 2,
+          gender: "men",
+          status: "work",
+          favorite: true,
+        },
+        {
+          id: "1a2b3c4d-0003-4a2f-89d3-bb11a111a113",
+          firstName: "Olena",
+          lastName: "Petrova",
+          phone: "+380671234321",
+          email: "elena.pet@gmail.com",
+          avatar: 3,
+          gender: "women",
+          status: "work",
+          favorite: false,
+        },
+        {
+          id: "1a2b3c4d-0004-4a2f-89d3-bb11a111a114",
+          firstName: "Serhii",
+          lastName: "Mykhailov",
+          phone: "+380503210987",
+          email: "s.mykhailov@gmail.com",
+          avatar: 4,
+          gender: "men",
+          status: "family",
+          favorite: true,
+        },
+        {
+          id: "1a2b3c4d-0005-4a2f-89d3-bb11a111a115",
+          firstName: "Iryna",
+          lastName: "Bielova",
+          phone: "+380632345678",
+          email: "iryna.belova@gmail.com",
+          avatar: 5,
+          gender: "women",
+          status: "friends",
+          favorite: false,
+        },
+        {
+          id: "1a2b3c4d-0006-4a2f-89d3-bb11a111a116",
+          firstName: "Oleksii",
+          lastName: "Voronov",
+          phone: "+380972221122",
+          email: "a.voronov@gmail.com",
+          avatar: 6,
+          gender: "men",
+          status: "work",
+          favorite: true,
+        },
+        {
+          id: "1a2b3c4d-0007-4a2f-89d3-bb11a111a117",
+          firstName: "Maria",
+          lastName: "Sydorova",
+          phone: "+380682223344",
+          email: "maria.syd@gmail.com",
+          avatar: 7,
+          gender: "women",
+          status: "family",
+          favorite: false,
+        },
+        {
+          id: "1a2b3c4d-0008-4a2f-89d3-bb11a111a118",
+          firstName: "Mykola",
+          lastName: "Lebid",
+          phone: "+380503456789",
+          email: "mykola.lebid@gmail.com",
+          avatar: 8,
+          gender: "men",
+          status: "private",
+          favorite: true,
+        },
+        {
+          id: "1a2b3c4d-0009-4a2f-89d3-bb11a111a119",
+          firstName: "Olha",
+          lastName: "Mykolaieva",
+          phone: "+380633210987",
+          email: "olha.mykolaieva@gmail.com",
+          avatar: 9,
+          gender: "women",
+          status: "friends",
+          favorite: false,
+        },
+        {
+          id: "1a2b3c4d-0010-4a2f-89d3-bb11a111a120",
+          firstName: "Yurii",
+          lastName: "Smirnov",
+          phone: "+380672345432",
+          email: "yurii.smirnov@gmail.com",
+          avatar: 10,
+          gender: "men",
+          status: "others",
+          favorite: true,
+        },
+      ]
+    ,
+    search: ''
+  })
+
+  const searchBySymbols = (symbol) => {
+    setStor(prevStor => { return {...prevStor, search: symbol}})
+  }
 
   const handleNewContact = (newContact) => {
-    setStor(prevStor => [...prevStor, newContact])
+    const contacts = [...prevStor.contacts, newContact]
+    setStor(prevStor => {return {...prevStor, contacts}})
   }
 
   const deleteContact = (id) => {
-    setStor(prevStor => prevStor.filter(contact => contact.id !== id))
+    const contacts = stor.contacts.filter(contact => contact.id !== id)
+    setStor(prevStor => {return{...prevStor, contacts}})
   }
 
   const handleEditContact = (updateContact) => {
-    setStor(prevStor => prevStor.map(contact => {
+    const contacts = stor.contacts.map(contact => {
       if(contact.id === updateContact.id){
         return {...contact, ...updateContact}
       }
       return contact
-    }))
+    })
+    setStor(prevStor => {return {...prevStor, contacts}})
   }
 
   return (
     <Router>
-      <Header/>
+      <Header searchBySymbols={searchBySymbols}/>
       <Routes>
         <Route path='/' element={<ContactList stor={stor} deleteContact={deleteContact}/>}/>
         <Route path='/add-contact' element={<AddContact addNewContact={handleNewContact}/>}/>

@@ -57,6 +57,14 @@
             box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
           }
         }
+
+        .deleteImg{
+          width: 50px;
+
+          &{
+            background-image: url();
+          }
+        }
       }
     }
   }
