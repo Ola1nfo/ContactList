@@ -41,25 +41,12 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {  
   .container {
-    padding: 12px;
-
-    .contacts-labels {
-      .fs-4 {
-        font-size: 22px;
-      }
-
-      .list {
-        .d-flex {
-          flex-direction: column;
-          align-items: flex-start;
-
-          span {
-            align-self: flex-end;
-          }
-        }
-      }
+    margin-bottom: 20px;
+    
+    .list{
+      margin-top: -20px;
     }
   }
 }
