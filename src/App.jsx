@@ -133,9 +133,12 @@ function App() {
   }
 
   const handleNewContact = (newContact) => {
+  setStor(prevStor => {
     const contacts = [...prevStor.contacts, newContact]
-    setStor(prevStor => {return {...prevStor, contacts}})
-  }
+    return { ...prevStor, contacts }
+  })
+}
+
 
   const deleteContact = (id) => {
     const contacts = stor.contacts.filter(contact => contact.id !== id)
@@ -154,11 +157,10 @@ function App() {
 
   return (
     <Router>
-      <Header searchBySymbols={searchBySymbols}/>
       <Routes>
-        <Route path='/' element={<ContactList stor={stor} deleteContact={deleteContact}/>}/>
-        <Route path='/add-contact' element={<AddContact addNewContact={handleNewContact}/>}/>
-        <Route path='/edit-contact/:id' element={<EditContact updateContact={handleEditContact} stor={stor}/>}/>
+        <Route path='/' element={<><Header searchBySymbols={searchBySymbols}/><ContactList stor={stor} deleteContact={deleteContact}/></>}/>
+        <Route path='/add-contact' element={<><Header searchBySymbols={searchBySymbols}/><AddContact addNewContact={handleNewContact}/></>}/>
+        <Route path='/edit-contact/:id' element={<><Header searchBySymbols={searchBySymbols}/><EditContact updateContact={handleEditContact} stor={stor}/></>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </Router>

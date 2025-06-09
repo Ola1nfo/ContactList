@@ -3,7 +3,8 @@ import './ContactItem.scss';
 
 import womenImg from './img/woman.png';
 import menImg from './img/man.png';
-import deleteIcon from './img/delete.gif';
+import deleteIcon from './img/delete.png';
+import editIcon from './img/edit.png';
 import heardFalse from '../../pages/AddContact/img/heafdFalse.png'
 import heardTrue from '../../pages/AddContact/img/heafdTrue.png'
 
@@ -70,7 +71,7 @@ export default function ContactItem({ stor, deleteContact, editContact }) {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [contactToShow, setContactToShow] = useState(null);
 
-  const filteredContacts = stor.search ? stor.contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.phone} ${contact.phone} `.includes(stor.search)) : stor.contacts
+  const filteredContacts = stor.search ? stor.contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`.includes(stor.search)) : stor.contacts
   
   const handleDeleteClick = (contact) => {
     setContactToShow(contact);
@@ -93,21 +94,17 @@ export default function ContactItem({ stor, deleteContact, editContact }) {
   return (
     <div className='containerBlock'>
       {filteredContacts.map(contact => (
-        <div className='contackBlock' key={contact.id}>
-          <img onClick={() => handleInfoClick(contact)} className='contactImg' src={contact.gender === 'women' ? womenImg : menImg} alt="" />
+        <div className='contactBlock' key={contact.id}>
+          <img onClick={() => handleInfoClick(contact)} className='contactImg' src={contact.gender === 'women' ? womenImg : menImg} alt="" title="Детальніше" />
           <div className="contactContent">
             <h3>{contact.firstName} {contact.lastName}</h3>
             <p>{contact.phone}</p>
             <p>{contact.email}</p>
             <p>{contact.status}</p>
             <div className="btnGroup">
-              <button
-                className="contactBtn"
-                onClick={() => handleDeleteClick(contact)}
-              >
-                <img className='deleteImg' src={deleteIcon} alt="Delete" />
+              <button className="contactBtn" onClick={() => handleDeleteClick(contact)}><img className='deleteImg' src={deleteIcon} alt="Delete" />
               </button>
-              <button className="contactBtn" onClick={() => editContact(contact.id)}>Edit</button>
+              <button className="contactBtn" onClick={() => editContact(contact.id)}><img className='deleteImg' src={editIcon} alt="Edit" /></button>
             </div>
           </div>
         </div>

@@ -97,7 +97,7 @@ export default function AddContact({ addNewContact }) {
                                         <option value="work">Work</option>
                                         <option value="family">Family</option>
                                         <option value="friends">Friends</option>
-                                        <option value="friends">Privat</option>
+                                        <option value="privat">Privat</option>
                                         <option value="others">Others</option>
                                     </Field>
                                     <div className="error-wrapper">

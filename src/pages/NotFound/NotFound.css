@@ -21,6 +21,7 @@ body {
     animation: moveClouds 60s linear infinite;
     animation-fill-mode: both;
     animation-play-state: running;
+    
 }
 
 .cloud1 {
@@ -181,7 +182,7 @@ span{
 
 .text1 {
     font-size: 28px;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .text2 {
@@ -192,7 +193,6 @@ span{
 .text3 {
     font-size: 16px;
     color: #666;
-    margin-top: 30px;
 }
 
 .text3 strong {

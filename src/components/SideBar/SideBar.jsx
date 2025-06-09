@@ -1,7 +1,7 @@
 import './SideBar.scss'
 
 export default function SideBar({ stor }) {
-    const filteredContacts = stor.search ? stor.contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.phone} ${contact.phone} `.includes(stor.search)) : stor.contacts
+    const filteredContacts = stor.search ? stor.contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status} `.includes(stor.search)) : stor.contacts
 
     const totalContacts = filteredContacts.length
     const statusCounts = {
@@ -15,8 +15,6 @@ export default function SideBar({ stor }) {
     filteredContacts.forEach(contact => {
         statusCounts[contact.status] +=1
     });
-
-    console.log(statusCounts);
     
     return(
         <aside className="container">
