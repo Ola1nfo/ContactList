@@ -1,9 +1,24 @@
+@font-face {
+  font-family: Caveat-VariableFont;
+  src: url(./font/Caveat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Tagesschrift-Regular;
+  src: url(./font/Tagesschrift-Regular.ttf);
+}
+
+.navbar-brand{
+    font-family: Tagesschrift-Regular;
+}
+
 .form-control{
     border-radius: 10px;
     border: 2px solid #cdb4db;
     background-color: #fff;
     padding: 5px;
     padding-right: 50px;
+    font-family: Tagesschrift-Regular;
 }
 
 .form-control:focus {

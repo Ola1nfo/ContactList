@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Caveat-VariableFont;
+  src: url(./font/Caveat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Tagesschrift-Regular;
+  src: url(./font/Tagesschrift-Regular.ttf);
+}
+
 .container {
   padding: 20px;
   background-color: #f3e8ff;
@@ -9,6 +19,7 @@
       font-weight: bold;
       color: #6c63ff; 
       margin-bottom: 40px;
+      font-family: Tagesschrift-Regular;
     }
 
     .list {
@@ -21,6 +32,7 @@
         font-weight: 500;
         margin-bottom: 15px;
         transition: transform 0.2s ease, box-shadow 0.3s ease;
+        font-family: Caveat-VariableFont;
 
         &:hover {
           transform: scale(1.02);

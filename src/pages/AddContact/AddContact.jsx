@@ -51,7 +51,6 @@ export default function AddContact({ addNewContact }) {
                             </div>
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
-                                    <label htmlFor="phone">Phone</label>
                                     <Field name="phone" >
                                         {({ field, form }) => (
                                             <IMaskInput
@@ -71,8 +70,7 @@ export default function AddContact({ addNewContact }) {
                                     </div>
                                 </div>
                                 <div className='mb-2 col-12 col-md-6'>
-                                    <label htmlFor="email">Email</label>
-                                    <Field type='text' name='email' id='email' autoComplete="off"/>
+                                    <Field type='text' name='email' id='email' placeholder='Enter your email' autoComplete="off"/>
                                     <div className="error-wrapper">
                                          <ErrorMessage name='email' component='p' className='error'/>
                                     </div>
@@ -80,7 +78,6 @@ export default function AddContact({ addNewContact }) {
                             </div>
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
-                                    <label htmlFor="gender">Gender</label>
                                     <Field as='select' type='text' name='gender' id='gender'>
                                         <option value="">Choose gender</option>
                                         <option value="men">Men</option>
@@ -91,7 +88,6 @@ export default function AddContact({ addNewContact }) {
                                     </div>
                                 </div>
                                 <div className='mb-2 col-12 col-md-6'>
-                                    <label htmlFor="status">Status</label>
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
                                         <option value="work">Work</option>

@@ -1,8 +1,19 @@
-.containerBlock {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
+@font-face {
+  font-family: Caveat-VariableFont;
+  src: url(./font/Caveat-VariableFont_wght.ttf);
+}
 
+@font-face {
+  font-family: Tagesschrift-Regular;
+  src: url(./font/Tagesschrift-Regular.ttf);
+}
+
+.containerBlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  font-family: Caveat-VariableFont;
+  
   .contactBlock {
     display: flex;
     background-color: #f3e8ff;
@@ -18,10 +29,12 @@
       h3 {
         color: #6c63ff;
         margin-bottom: 10px;
+        font-family: Tagesschrift-Regular;
       }
 
       p {
         margin: 3px 0;
+        font-size: 20px;
       }
 
       .btnGroup {
@@ -155,6 +168,7 @@
 
 .modal-header{
   background-color: #f3e8ff;
+  font-family: Tagesschrift-Regular;
 }
 
 .modal-body {
@@ -164,10 +178,12 @@
   text-align: center;
   background-color: #edddfe;
   padding: 10px;
-  font-size: 18px;
+  font-size: 20px;
+  font-family: Caveat-VariableFont;
 }
 
 .modal-footer {
   justify-content: center;
   background-color: #f3e8ff;
+  font-family: Tagesschrift-Regular;
 }
