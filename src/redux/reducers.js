@@ -1,5 +1,7 @@
+import { contactStatus } from './action'
 import{
     ADD_CONTACT,
+    CONTACT_STATUS,
     DELETE_CONTACT,
     EDIT_CONTACT,
     SEARCH_CONTACT
@@ -153,6 +155,11 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 search: action.payload
             }
+        case CONTACT_STATUS:
+          return{
+            ...state,
+            contactStatus: action.payload
+          }
         default:
             return state
     }

@@ -3,6 +3,7 @@ import './ContactItem.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/action'
 import { editContact } from '../../redux/action';
+import { contactStatus } from '../../redux/action'
 
 import womenImg from './img/woman.png';
 import menImg from './img/man.png';
@@ -74,12 +75,17 @@ export default function ContactItem() {
   const contacts = useSelector(state => state.contacts)
   const search = useSelector(state => state.search)
   const dispatch = useDispatch()
+  const filterStatus = useSelector(state => state.contactStatus)
 
   const [infoModalShow, setInfoModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [contactToShow, setContactToShow] = useState(null);
 
-  const filteredContacts = search ? contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`.includes(search)) : contacts
+  const filteredContacts = contacts.filter(contact => {
+      const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
+      const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
+      return matchesSearch && matchesStatus;
+  });
   
   const handleDeleteClick = (contact) => {
     setContactToShow(contact);
@@ -93,7 +99,7 @@ export default function ContactItem() {
 
    const handleConfirmDelete = () => {
     if (contactToShow) {
-      deleteContact(contactToShow.id);
+      dispatch(deleteContact(contactToShow.id));
       setContactToShow(null);
       setDeleteModalShow(false);
     }
@@ -110,10 +116,10 @@ export default function ContactItem() {
             <p>{contact.email}</p>
             <p>{contact.status}</p>
             <div className="btnGroup">
-              <button className="contactBtn" onClick={() => dispatch(deleteContact(contact.id))}><img className='deleteImg' src={deleteIcon} alt="Delete" />
+              <button className="contactBtn" onClick={() => handleDeleteClick(contact)}><img className='deleteImg' src={deleteIcon} alt="Delete" />
               </button> 
               <Link to={`/edit-contact/${contact.id}`}>
-                <button className="contactBtn" onClick={() => dispatch(editContact(contact.id))}><img className='deleteImg' src={editIcon} alt="Edit" /></button>
+                <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
               </Link>
             </div>
           </div>

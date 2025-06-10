@@ -1,5 +1,6 @@
 import{
     ADD_CONTACT,
+    CONTACT_STATUS,
     DELETE_CONTACT,
     EDIT_CONTACT,
     SEARCH_CONTACT
@@ -30,5 +31,12 @@ export const search = (symbol) => {
     return{
         type: SEARCH_CONTACT,
         payload: symbol
+    }
+}
+
+export const contactStatus = (status) => {
+    return {
+        type: CONTACT_STATUS,
+        payload: status
     }
 }

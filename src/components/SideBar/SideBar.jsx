@@ -1,11 +1,22 @@
 import './SideBar.scss'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { contactStatus } from '../../redux/action'
 
 export default function SideBar() {
     const contacts = useSelector(state => state.contacts)
     const search = useSelector(state => state.search)
+    const dispatch = useDispatch()
+    const filterStatus = useSelector(state => state.contactStatus)
 
-    const filteredContacts = search ? contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status} `.includes(search)) : contacts
+    const statusClick = (status) => {     
+        dispatch(contactStatus(status))
+    }
+
+    const filteredContacts = contacts.filter(contact => {
+        const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
+        const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
+        return matchesSearch && matchesStatus;
+    });
 
     const totalContacts = filteredContacts.length
     const statusCounts = {
@@ -29,31 +40,31 @@ export default function SideBar() {
                             All contacts: <span className="fs-5">{totalContacts}</span>
                         </div>
                         <div className="list fs-5">
-                            <div className="listItem d-flex justify-content-between mb-3">
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('work')}>
                                 <div>
                                     Work
                                 </div>
                                 <span className="fs-5">{statusCounts.work}</span>
                             </div>
-                            <div className="listItem d-flex justify-content-between mb-3">
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('family')}>
                                 <div>
                                     Family
                                 </div>
                                 <span className="fs-5">{statusCounts.family}</span>
                             </div>
-                            <div className="listItem d-flex justify-content-between mb-3">
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('friends')}>
                                 <div>
                                     Friends
                                 </div>
                                 <span className="fs-5">{statusCounts.friends}</span>
                             </div>
-                            <div className="listItem d-flex justify-content-between mb-3">
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('private')}>
                                 <div>
                                     Private
                                 </div>
                                 <span className="fs-5">{statusCounts.private}</span>
                             </div>
-                            <div className="listItem d-flex justify-content-between mb-3">
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('others')}>
                                 <div>
                                     Others
                                 </div>
