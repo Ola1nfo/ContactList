@@ -1,7 +1,11 @@
 import './SideBar.scss'
+import { useSelector } from 'react-redux'
 
-export default function SideBar({ stor }) {
-    const filteredContacts = stor.search ? stor.contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status} `.includes(stor.search)) : stor.contacts
+export default function SideBar() {
+    const contacts = useSelector(state => state.contacts)
+    const search = useSelector(state => state.search)
+
+    const filteredContacts = search ? contacts.filter(contact => `${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status} `.includes(search)) : contacts
 
     const totalContacts = filteredContacts.length
     const statusCounts = {

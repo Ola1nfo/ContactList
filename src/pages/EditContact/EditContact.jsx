@@ -3,14 +3,19 @@ import { useParams, useNavigate } from "react-router"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { contactValidationSchema } from '../../Validation'
 import { IMaskInput } from 'react-imask'
+import { useSelector, useDispatch } from 'react-redux'
+import { editContact } from '../../redux/action'
 
 import heardFalse from '../AddContact/img/heafdFalse.png'
 import heardTrue from '../AddContact/img/heafdTrue.png'
 
-export default function EditContact({stor, updateContact}) {
+export default function EditContact() {
     const { id } = useParams()
     const navigate = useNavigate()
-    const contact = stor.contacts.find(con => con.id === id)
+    const contacts = useSelector(state => state.contacts)
+    const dispatch = useDispatch()
+
+    const contact = contacts.find(con => con.id === id)
 
     const initialValues = {
         id: contact.id,
@@ -25,7 +30,7 @@ export default function EditContact({stor, updateContact}) {
 
     const handleSubmit = (values) => {
         console.log(values);
-        updateContact(values);
+        dispatch(editContact(values.id, values))
         navigate ('/')
     }
 

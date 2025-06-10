@@ -1,7 +1,12 @@
 import { Link } from "react-router";
 import './Header.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import { search } from '../../redux/action'
  
-export default function Header({searchBySymbols}) {
+export default function Header() {
+    const searchContact = useSelector(state => state.search)
+    const dispatch = useDispatch()
+
     return(
         <header className="container">
             <div className="row">
@@ -18,7 +23,7 @@ export default function Header({searchBySymbols}) {
                            </div>
  
                             <form className="d-flex" role="search">
-                                <input onInput={e => searchBySymbols(e.target.value)} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                                <input value={searchContact} onInput={e => dispatch(search(e.target.value))} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             </form>
                         </div>
                     </nav>
