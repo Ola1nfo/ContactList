@@ -36,7 +36,7 @@ export default function SideBar() {
             <div className="row">
                 <div className="col-12">
                     <div className="contacts-labels">
-                        <div className="fs-4 mb-5 mt-4 allContact">
+                        <div className="fs-4 mb-5 mt-4 allContact" onClick={() => statusClick('all')}>
                             All contacts: <span className="fs-5">{totalContacts}</span>
                         </div>
                         <div className="list fs-5">
