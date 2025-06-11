@@ -20,6 +20,17 @@
     border-radius: 70px;
     padding: 10px;
     align-items: center;
+    position: relative;
+
+    .favoriteBtn{
+      background: none;
+      border: none;
+      font-size: 45px;
+      color: #b5179e;
+      position: absolute;
+      top: 5px;
+      left: 20px;
+    }
 
     .contactContent {
       flex: 1;

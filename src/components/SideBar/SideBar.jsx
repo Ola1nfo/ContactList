@@ -1,21 +1,27 @@
 import './SideBar.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { contactStatus } from '../../redux/action'
+import { contactStatus, statusFavorite } from '../../redux/action'
 
 export default function SideBar() {
     const contacts = useSelector(state => state.contacts)
     const search = useSelector(state => state.search)
     const dispatch = useDispatch()
     const filterStatus = useSelector(state => state.contactStatus)
+    const filterFavorite = useSelector(state => state.filterFavorite)
 
     const statusClick = (status) => {     
         dispatch(contactStatus(status))
     }
 
+    const statusFavoriteClick = () => {
+        dispatch(statusFavorite(!filterFavorite))
+    }
+
     const filteredContacts = contacts.filter(contact => {
         const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
         const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-        return matchesSearch && matchesStatus;
+        const matchesFavorite = filterFavorite ? contact.favorite : true
+        return matchesSearch && matchesStatus && matchesFavorite;
     });
 
     const totalContacts = filteredContacts.length
@@ -26,6 +32,8 @@ export default function SideBar() {
         friends: 0,
         others: 0
     }
+
+    const favoriteCount = filteredContacts.filter(contact => contact.favorite).length;
 
     filteredContacts.forEach(contact => {
         statusCounts[contact.status] +=1
@@ -69,6 +77,12 @@ export default function SideBar() {
                                     Others
                                 </div>
                                 <span className="fs-5">{statusCounts.others}</span>
+                            </div>
+                            <div className="listItem d-flex justify-content-between mb-3" onClick={statusFavoriteClick}>
+                                <div>
+                                    Favorite
+                                </div>
+                                <span className="fs-5">{favoriteCount}</span>
                             </div>
                         </div>
                     </div>

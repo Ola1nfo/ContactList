@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import './ContactItem.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/action'
-import { editContact } from '../../redux/action';
-import { contactStatus } from '../../redux/action'
+import { deleteContact, toggleFavorite } from '../../redux/action'
 
 import womenImg from './img/woman.png';
 import menImg from './img/man.png';
@@ -37,7 +35,7 @@ function DeleteModal({ show, onHide, onConfirm }) {
   );
 }
 
-function InfoModal({ show, onHide, onConfirm, contact }) {
+function InfoModal({ show, onHide, contact }) {
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -76,16 +74,18 @@ export default function ContactItem() {
   const search = useSelector(state => state.search)
   const dispatch = useDispatch()
   const filterStatus = useSelector(state => state.contactStatus)
+  const filterFavorite = useSelector(state => state.filterFavorite)
 
   const [infoModalShow, setInfoModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [contactToShow, setContactToShow] = useState(null);
 
   const filteredContacts = contacts.filter(contact => {
-      const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
-      const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-      return matchesSearch && matchesStatus;
-  });
+    const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
+    const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
+    const matchesFavorite = filterFavorite ? contact.favorite : true
+    return matchesSearch && matchesStatus && matchesFavorite;
+});
   
   const handleDeleteClick = (contact) => {
     setContactToShow(contact);
@@ -110,6 +110,9 @@ export default function ContactItem() {
       {filteredContacts.map(contact => (
         <div className='contactBlock' key={contact.id}>
           <img onClick={() => handleInfoClick(contact)} className='contactImg' src={contact.gender === 'women' ? womenImg : menImg} alt="" title="Детальніше" />
+          <button className='favoriteBtn' onClick={() => dispatch(toggleFavorite(contact.id))}>
+            {contact.favorite ? '♥' : '♡'}
+          </button>
           <div className="contactContent">
             <h3>{contact.firstName} {contact.lastName}</h3>
             <p>{contact.phone}</p>

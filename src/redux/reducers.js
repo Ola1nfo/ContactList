@@ -4,7 +4,9 @@ import{
     CONTACT_STATUS,
     DELETE_CONTACT,
     EDIT_CONTACT,
-    SEARCH_CONTACT
+    SEARCH_CONTACT,
+    TOGGLE_FAVORITE,
+    CONTACT_STATUS_FAVORITE
 } from './type'
 
 const intialState = {
@@ -122,7 +124,7 @@ const intialState = {
         },
       ]
     ,
-    search: ''
+    search: '',
 }
 
 const reducer = (state = intialState, action) => {
@@ -159,6 +161,18 @@ const reducer = (state = intialState, action) => {
           return{
             ...state,
             contactStatus: action.payload
+          }
+        case TOGGLE_FAVORITE:
+          return{
+            ...state,
+            contacts: state.contacts.map(contact => 
+              contact.id === action.payload ? {...contact, favorite: !contact.favorite} : contact
+            )
+          }
+        case CONTACT_STATUS_FAVORITE:
+          return{
+            ...state,
+            statusFavorite: action.payload
           }
         default:
             return state
