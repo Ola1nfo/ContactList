@@ -1,11 +1,11 @@
 import{
     ADD_CONTACT,
-    CONTACT_STATUS,
     DELETE_CONTACT,
     EDIT_CONTACT,
-    SEARCH_CONTACT,
     TOGGLE_FAVORITE,
-    CONTACT_STATUS_FAVORITE
+    SEARCH_CONTACT,
+    SET_FILTER,
+    ADD_NEW_STATUS
 } from './type'
 
 export const addContact = (newContact) => {
@@ -32,13 +32,13 @@ export const editContact = (id, updatedContact) => {
 export const search = (symbol) => {
     return{
         type: SEARCH_CONTACT,
-        payload: symbol
+        payload: symbol.toLowerCase()
     }
 }
 
-export const contactStatus = (status) => {
+export const setFilter = (status) => {
     return {
-        type: CONTACT_STATUS,
+        type: SET_FILTER,
         payload: status
     }
 }
@@ -50,9 +50,9 @@ export const toggleFavorite = (id) => {
     }
 }
 
-export const statusFavorite = (favorite) => {
+export const addNewStatus = (newStatus) => {
     return{
-        type: CONTACT_STATUS_FAVORITE,
-        payload: favorite
+        type: ADD_NEW_STATUS,
+        payload: newStatus
     }
 }

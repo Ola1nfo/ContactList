@@ -1,46 +1,38 @@
 import './SideBar.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { contactStatus, statusFavorite } from '../../redux/action'
+import { useMemo } from 'react'
+import { setFilter } from '../../redux/action'
 
 export default function SideBar() {
     const contacts = useSelector(state => state.contacts)
-    const search = useSelector(state => state.search)
+    const search = useSelector(state => state.search) 
+    const contactStatuss = useSelector(state => state.contactStatuss)
     const dispatch = useDispatch()
     const filterStatus = useSelector(state => state.contactStatus)
-    const filterFavorite = useSelector(state => state.filterFavorite)
-
-    const statusClick = (status) => {     
-        dispatch(contactStatus(status))
-    }
-
-    const statusFavoriteClick = () => {
-        dispatch(statusFavorite(!filterFavorite))
-    }
-
+    
     const filteredContacts = contacts.filter(contact => {
-        const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
+        const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true;
         const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-        const matchesFavorite = filterFavorite ? contact.favorite : true
-        return matchesSearch && matchesStatus && matchesFavorite;
+        return matchesSearch && matchesStatus;
     });
-
+   
     const totalContacts = filteredContacts.length
-    const statusCounts = {
-        work: 0,
-        family: 0,
-        private: 0,
-        friends: 0,
-        others: 0
+
+    const statusCounts = useMemo(() => {
+        const counts = {...contactStatuss}
+        Object.keys(counts).forEach(status => (counts[status].count = 0))
+        filteredContacts.forEach(contact => {
+            contactStatuss[contact.status].count++
+        })
+        return counts
+    }, [filteredContacts, contactStatuss, search])
+
+    const statusClick = (status) => {
+        dispatch(setFilter(status))
     }
-
-    const favoriteCount = filteredContacts.filter(contact => contact.favorite).length;
-
-    filteredContacts.forEach(contact => {
-        statusCounts[contact.status] +=1
-    });
     
     return(
-        <aside className="container">
+        <aside className="container position-sticky">
             <div className="row">
                 <div className="col-12">
                     <div className="contacts-labels">
@@ -48,13 +40,17 @@ export default function SideBar() {
                             All contacts: <span className="fs-5">{totalContacts}</span>
                         </div>
                         <div className="list fs-5">
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('work')}>
-                                <div>
-                                    Work
-                                </div>
-                                <span className="fs-5">{statusCounts.work}</span>
-                            </div>
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('family')}>
+                            {
+                                Object.keys(statusCounts).map(status => (
+                                    <div key={status} className="listItem d-flex justify-content-between mb-3" style={{backgroundColor: statusCounts[status].bg}} onClick={() => statusClick(status)}>
+                                        <div className='statusWord'>
+                                            {status}
+                                        </div>
+                                        <span className="fs-5">{statusCounts[status].count}</span>
+                                    </div>
+                                ))
+                            }
+                            {/* <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('family')}>
                                 <div>
                                     Family
                                 </div>
@@ -83,7 +79,7 @@ export default function SideBar() {
                                     Favorite
                                 </div>
                                 <span className="fs-5">{favoriteCount}</span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

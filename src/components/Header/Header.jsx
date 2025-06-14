@@ -8,7 +8,7 @@ export default function Header() {
     const dispatch = useDispatch()
 
     return(
-        <header className="container">
+        <header className="container containerHeader">
             <div className="row">
                 <div className="col-12">
                     <nav className="navbar bg-body-tertiary rounded shadow">
@@ -19,6 +19,9 @@ export default function Header() {
                             </Link>
                             <Link className="navbar-brand" to="/add-contact">
                                Add Contact
+                            </Link>
+                            <Link className="navbar-brand" to="/contact-statuss">
+                               Statuss
                             </Link>
                            </div>
  

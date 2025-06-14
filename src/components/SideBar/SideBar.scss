@@ -12,6 +12,8 @@
   padding: 20px;
   background-color: #f3e8ff;
   color: #2d334a;
+  position: sticky;
+  top: 96px;
 
   .contacts-labels {
     .allContact {
@@ -25,7 +27,7 @@
 
     .list {
       .listItem {
-        padding: 12px 20px;
+        padding: 5px 20px;
         border-radius: 12px;
         background-color: #fff;
         border: 2px solid #cdb4db;
@@ -41,8 +43,9 @@
           cursor: pointer;
         }
 
-        div {
-          font-size: 18px;
+        .statusWord {
+          font-size: 22px;
+          text-transform: uppercase;
         }
 
         span {

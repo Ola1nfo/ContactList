@@ -6,6 +6,6 @@ export const contactValidationSchema = Yup.object().shape({
     phone: Yup.string().required('Phone is required').min(19, 'More symbols'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     gender: Yup.string().oneOf(['men', 'women'], 'Invalid gender').required('Gender is required'),
-    status: Yup.string().oneOf(['work', 'family', 'friends', 'privat', 'others']).required('Status is required'),
+    status: Yup.string().required('Status is required'),
     favorite: Yup.boolean()
 })

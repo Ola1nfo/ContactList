@@ -46,7 +46,7 @@ function InfoModal({ show, onHide, contact }) {
           {contact && (
           <>
             <img
-              className='contactImg'
+              className={`contactImg  ${contact.gender}`}
               src={contact.gender === 'women' ? womenImg : menImg}
               alt=""
             />
@@ -73,19 +73,17 @@ export default function ContactItem() {
   const contacts = useSelector(state => state.contacts)
   const search = useSelector(state => state.search)
   const dispatch = useDispatch()
-  const filterStatus = useSelector(state => state.contactStatus)
-  const filterFavorite = useSelector(state => state.filterFavorite)
+  const filterStatus = useSelector(state => state.contactStatus)  
 
   const [infoModalShow, setInfoModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [contactToShow, setContactToShow] = useState(null);
 
   const filteredContacts = contacts.filter(contact => {
-    const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).includes(search) : true;
-    const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-    const matchesFavorite = filterFavorite ? contact.favorite : true
-    return matchesSearch && matchesStatus && matchesFavorite;
-});
+      const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true;
+      const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
+      return matchesSearch && matchesStatus;
+  });
   
   const handleDeleteClick = (contact) => {
     setContactToShow(contact);
@@ -109,7 +107,7 @@ export default function ContactItem() {
     <div className='containerBlock'>
       {filteredContacts.map(contact => (
         <div className='contactBlock' key={contact.id}>
-          <img onClick={() => handleInfoClick(contact)} className='contactImg' src={contact.gender === 'women' ? womenImg : menImg} alt="" title="Детальніше" />
+          <img onClick={() => handleInfoClick(contact)} className={`contactImg  ${contact.gender}`} src={contact.gender === 'women' ? womenImg : menImg} alt="" title="Детальніше" />
           <button className='favoriteBtn' onClick={() => dispatch(toggleFavorite(contact.id))}>
             {contact.favorite ? '♥' : '♡'}
           </button>

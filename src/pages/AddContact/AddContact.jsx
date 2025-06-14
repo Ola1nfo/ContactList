@@ -4,7 +4,7 @@ import { contactValidationSchema } from '../../Validation'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
 import { IMaskInput } from 'react-imask'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { addContact } from '../../redux/action'
 
 import heardFalse from './img/heafdFalse.png'
@@ -13,6 +13,7 @@ import heardTrue from './img/heafdTrue.png'
 export default function AddContact() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const contactStatuss = useSelector(state => state.contactStatuss)
 
     const initialValues = {
         id: uuidv4(),
@@ -93,11 +94,11 @@ export default function AddContact() {
                                 <div className='mb-2 col-12 col-md-6'>
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
-                                        <option value="work">Work</option>
-                                        <option value="family">Family</option>
-                                        <option value="friends">Friends</option>
-                                        <option value="privat">Privat</option>
-                                        <option value="others">Others</option>
+                                        {Object.keys(contactStatuss).map((statusKey) => (
+                                            <option key={statusKey} value={statusKey}>
+                                                {statusKey}
+                                            </option>
+                                        ))}
                                     </Field>
                                     <div className="error-wrapper">
                                         <ErrorMessage name='status' component='p' className='error'/>

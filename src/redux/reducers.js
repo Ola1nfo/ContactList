@@ -1,12 +1,11 @@
-import { contactStatus } from './action'
 import{
     ADD_CONTACT,
-    CONTACT_STATUS,
     DELETE_CONTACT,
     EDIT_CONTACT,
-    SEARCH_CONTACT,
     TOGGLE_FAVORITE,
-    CONTACT_STATUS_FAVORITE
+    SEARCH_CONTACT,
+    SET_FILTER,
+    ADD_NEW_STATUS
 } from './type'
 
 const intialState = {
@@ -125,54 +124,62 @@ const intialState = {
       ]
     ,
     search: '',
+    contactStatuss:{
+      work: {count: 0, bg: '#7268f2'},
+      family: {count: 0, bg: '#d6c1e5'},
+      private: {count: 0, bg: '#a3118c'},
+      friends: {count: 0, bg: '#ffd3e6'},
+      others: {count: 0, bg: '#847aff'}
+    }
 }
 
 const reducer = (state = intialState, action) => {
     switch (action.type) {
         case ADD_CONTACT:
-            return{
-                ...state,
-                contacts: [...state.contacts, action.payload]
-            }
-        case DELETE_CONTACT:
-            return{
-                ...state,
-                contacts: state.contacts.filter(contact => contact.id !== action.payload)
-            }
-        case EDIT_CONTACT:
-            return{
-                ...state,
-                contacts: state.contacts.map(contact => {
-                    if (contact.id === action.payload.id){
-                        return{
-                            ...contact,
-                            ...action.payload.updatedContact
-                        }
-                    }
-                    return contact
-                })
-            }
-        case SEARCH_CONTACT:
-            return{
-                ...state,
-                search: action.payload
-            }
-        case CONTACT_STATUS:
           return{
-            ...state,
-            contactStatus: action.payload
+              ...state,
+              contacts: [...state.contacts, action.payload]
+          }
+        case DELETE_CONTACT:
+          return{
+              ...state,
+              contacts: state.contacts.filter(contact => contact.id !== action.payload)
+          }
+        case EDIT_CONTACT:
+          return{
+              ...state,
+              contacts: state.contacts.map(contact => {
+                  if (contact.id === action.payload.id){
+                      return{
+                          ...contact,
+                          ...action.payload.updatedContact
+                      }
+                  }
+                  return contact
+              })
           }
         case TOGGLE_FAVORITE:
           return{
             ...state,
-            contacts: state.contacts.map(contact => 
-              contact.id === action.payload ? {...contact, favorite: !contact.favorite} : contact
-            )
+            contacts: state.contacts.map(contact => contact.id === action.payload ? {...contact, favorite: !contact.favorite} : contact,)
           }
-        case CONTACT_STATUS_FAVORITE:
+        case SEARCH_CONTACT:
           return{
             ...state,
-            statusFavorite: action.payload
+            search: action.payload
+          }
+        case SET_FILTER:
+          return{
+            ...state,
+            contactStatus: action.payload
+          }
+        case ADD_NEW_STATUS:
+          return {
+            ...state,
+            contactStatuss: {
+              ...state.contactStatuss,
+              ...action.payload
+            }
           }
         default:
             return state

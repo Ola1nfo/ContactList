@@ -1,0 +1,105 @@
+@font-face {
+  font-family: Caveat-VariableFont;
+  src: url(./font/Caveat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Tagesschrift-Regular;
+  src: url(./font/Tagesschrift-Regular.ttf);
+}
+
+.contactStatuss{
+    color: #2d334a;
+    text-align: center;
+
+    .addBtn{
+        background-color: #6c63ff;
+        text-decoration: none;
+        color: #fff;
+        padding: 7px 50px;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: Tagesschrift-Regular;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+        
+
+        &:hover {
+            background-color: #8477ff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(108, 99, 255, 0.4);
+        }
+    }
+
+    .tableStatus{
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 20px;
+
+        th {
+            vertical-align: middle;
+            text-align: center;
+            padding: 5px;
+            font-size: 30px;
+            font-family: Tagesschrift-Regular;
+        }
+
+        td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 5px;
+            font-size: 25px;
+            font-family: Caveat-VariableFont;
+        }
+        
+        tbody tr {
+            transition: transform 0.3s ease;
+            
+            &:hover {
+                transform: scale(1.02);
+            }
+            td:first-child {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+
+            td:last-child {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+            }
+            }
+
+        .statusName{
+            text-transform: uppercase;
+        }
+        
+        .btnGroup {
+            margin-top: 15px;
+            
+            .contactBtn {
+                display: inline-block;
+                margin-right: 10px;
+                padding: 0px;
+                background-color: transparent;
+                color: white;
+                font-weight: bold;
+                border: none;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+            
+            .deleteImg{
+                width: 35px;
+            }
+        }
+    }  
+}
