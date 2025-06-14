@@ -14,8 +14,30 @@
   z-index: 1000;
 }
 
-.navbar-brand{
-    font-family: Tagesschrift-Regular;
+.navbar-menu {
+  font-family: Tagesschrift-Regular;
+  position: relative;
+  padding-bottom: 6px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #ffc8dd;
+    transition: width 0.5s ease;
+  }
+
+  &:hover::after,
+  &.active::after {
+    width: 100%;
+  }
+
+  &.active {
+    color: #ffc8dd;
+  }
 }
 
 .form-control{

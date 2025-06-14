@@ -6,9 +6,6 @@ import { useNavigate} from  'react-router'
 
 export default function ContactList() {
     const navigate = useNavigate()
-    const editContact = (id) => {
-        navigate(`/edit-contact/${id}`)
-    }
 
     return(
         <div className="contactList container rounded bg-white shadow-lg">

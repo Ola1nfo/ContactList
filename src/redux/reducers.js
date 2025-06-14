@@ -125,11 +125,11 @@ const intialState = {
     ,
     search: '',
     contactStatuss:{
-      work: {count: 0, bg: '#7268f2'},
-      family: {count: 0, bg: '#d6c1e5'},
-      private: {count: 0, bg: '#a3118c'},
+      work: {count: 0, bg: '#a5a0ff'},
+      family: {count: 0, bg: '#d2a8e6'},
+      private: {count: 0, bg: '#ffafcc'},
       friends: {count: 0, bg: '#ffd3e6'},
-      others: {count: 0, bg: '#847aff'}
+      others: {count: 0, bg: '#e0cce7'}
     }
 }
 

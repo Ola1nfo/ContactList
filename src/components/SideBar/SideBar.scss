@@ -29,17 +29,21 @@
       .listItem {
         padding: 5px 20px;
         border-radius: 12px;
-        background-color: #fff;
         border: 2px solid #cdb4db;
         color: #2d334a;
         font-weight: 500;
         margin-bottom: 15px;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        transition: transform 1s ease, box-shadow 0.3s ease;
         font-family: Caveat-VariableFont;
 
+        &.active {
+            transform: scale(1.08);
+            border: 3px solid #ffc8dd;  
+          }
+
         &:hover {
-          transform: scale(1.02);
-          border: 2px solid #ffc8dd;
+          transform: scale(1.08);
+          border: 3px solid #ffc8dd;
           cursor: pointer;
         }
 

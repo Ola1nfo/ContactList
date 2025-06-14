@@ -14,6 +14,7 @@ export default function EditContact() {
     const navigate = useNavigate()
     const contacts = useSelector(state => state.contacts)
     const dispatch = useDispatch()
+    const contactStatuss = useSelector(state => state.contactStatuss)
 
     const contact = contacts.find(con => con.id === id)
 
@@ -96,11 +97,11 @@ export default function EditContact() {
                                 <div className='mb-2 col-12 col-md-6'>
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
-                                        <option value="work">Work</option>
-                                        <option value="family">Family</option>
-                                        <option value="friends">Friends</option>
-                                        <option value="friends">Privat</option>
-                                        <option value="others">Others</option>
+                                        {Object.keys(contactStatuss).map((statusKey) => (
+                                            <option key={statusKey} value={statusKey}>
+                                                {statusKey}
+                                            </option>
+                                        ))}
                                     </Field>
                                     <div className="error-wrapper">
                                         <ErrorMessage name='status' component='p' className='error'/>

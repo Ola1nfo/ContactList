@@ -42,7 +42,7 @@ export default function SideBar() {
                         <div className="list fs-5">
                             {
                                 Object.keys(statusCounts).map(status => (
-                                    <div key={status} className="listItem d-flex justify-content-between mb-3" style={{backgroundColor: statusCounts[status].bg}} onClick={() => statusClick(status)}>
+                                    <div key={status} className={`listItem d-flex justify-content-between mb-3 ${status === filterStatus ? 'active' : ''}`} style={{backgroundColor: statusCounts[status].bg}} onClick={() => statusClick(status)}>
                                         <div className='statusWord'>
                                             {status}
                                         </div>
@@ -50,36 +50,6 @@ export default function SideBar() {
                                     </div>
                                 ))
                             }
-                            {/* <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('family')}>
-                                <div>
-                                    Family
-                                </div>
-                                <span className="fs-5">{statusCounts.family}</span>
-                            </div>
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('friends')}>
-                                <div>
-                                    Friends
-                                </div>
-                                <span className="fs-5">{statusCounts.friends}</span>
-                            </div>
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('private')}>
-                                <div>
-                                    Private
-                                </div>
-                                <span className="fs-5">{statusCounts.private}</span>
-                            </div>
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={() => statusClick('others')}>
-                                <div>
-                                    Others
-                                </div>
-                                <span className="fs-5">{statusCounts.others}</span>
-                            </div>
-                            <div className="listItem d-flex justify-content-between mb-3" onClick={statusFavoriteClick}>
-                                <div>
-                                    Favorite
-                                </div>
-                                <span className="fs-5">{favoriteCount}</span>
-                            </div> */}
                         </div>
                     </div>
                 </div>
