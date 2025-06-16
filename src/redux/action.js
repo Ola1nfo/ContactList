@@ -5,7 +5,9 @@ import{
     TOGGLE_FAVORITE,
     SEARCH_CONTACT,
     SET_FILTER,
-    ADD_NEW_STATUS
+    ADD_NEW_STATUS,
+    DELETE_STATUS,
+
 } from './type'
 
 export const addContact = (newContact) => {
@@ -54,5 +56,12 @@ export const addNewStatus = (newStatus) => {
     return{
         type: ADD_NEW_STATUS,
         payload: newStatus
+    }
+}
+
+export const deleteStatus = (status) => {
+    return{
+        type: DELETE_STATUS,
+        payload: status
     }
 }

@@ -5,7 +5,8 @@ import{
     TOGGLE_FAVORITE,
     SEARCH_CONTACT,
     SET_FILTER,
-    ADD_NEW_STATUS
+    ADD_NEW_STATUS,
+    DELETE_STATUS
 } from './type'
 
 const intialState = {
@@ -180,6 +181,26 @@ const reducer = (state = intialState, action) => {
               ...state.contactStatuss,
               ...action.payload
             }
+          }
+        case DELETE_STATUS:
+          const newContactStatussAfterDelete = {...state.contactStatuss}
+          const deleteContactStatus = newContactStatussAfterDelete[action.payload].count
+          delete newContactStatussAfterDelete[action.payload]
+
+          const contactsAfterStatusDelete = state.contacts.map(contact => {
+            if(contact.status === action.payload){
+              return {...contact, status: 'others'}
+            }
+            return contact
+          })
+          
+          if(newContactStatussAfterDelete['others']){
+            newContactStatussAfterDelete['others'].count += deleteContactStatus
+          }
+          return{
+            ...state,
+            contactStatuss: newContactStatussAfterDelete,
+            contacts: contactsAfterStatusDelete
           }
         default:
             return state

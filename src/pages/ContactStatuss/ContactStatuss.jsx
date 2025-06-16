@@ -1,15 +1,17 @@
 import './ContactStatuss.scss';
 import { useMemo } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router"
 
 import deleteIcon from './img/delete.png';
 import editIcon from './img/edit.png';
+import { deleteStatus } from '../../redux/action';
 
 
 export default function ContactStatuss() {
     const contactStatuss = useSelector(state => state.contactStatuss)
     const contacts = useSelector(state => state.contacts)
+    const dispatch = useDispatch()
 
     const statusCounts = useMemo(() => {
         const counts = {...contactStatuss}
@@ -19,6 +21,10 @@ export default function ContactStatuss() {
         })
         return counts
     }, [contacts, contactStatuss])
+
+    const handleDeleteStatus = (status) => {
+        dispatch(deleteStatus(status))
+    }
 
     return(
         <main className="container contactStatuss rounded bg-white shadow-lg">
@@ -44,7 +50,7 @@ export default function ContactStatuss() {
                                 <td>{statusCounts[status].count}</td>
                                 <td>
                                     <div className="btnGroup">
-                                        <button className="contactBtn"><img className='deleteImg' src={deleteIcon} alt="Delete" />
+                                        <button className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
                                         </button> 
                                         <Link to={`/edit-status/${status}`}>
                                         <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
