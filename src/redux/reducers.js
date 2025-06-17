@@ -6,7 +6,8 @@ import{
     SEARCH_CONTACT,
     SET_FILTER,
     ADD_NEW_STATUS,
-    DELETE_STATUS
+    DELETE_STATUS,
+    EDIT_STATUS
 } from './type'
 
 const intialState = {
@@ -175,6 +176,10 @@ const reducer = (state = intialState, action) => {
             contactStatus: action.payload
           }
         case ADD_NEW_STATUS:
+          const newStatusName = Object.keys(action.payload)[0];
+          if (state.contactStatuss[newStatusName]) {
+            return state;
+          }
           return {
             ...state,
             contactStatuss: {
@@ -201,6 +206,20 @@ const reducer = (state = intialState, action) => {
             ...state,
             contactStatuss: newContactStatussAfterDelete,
             contacts: contactsAfterStatusDelete
+          }
+        case EDIT_STATUS:
+          const { oldStatusName, editStatusName, updatedStatus } = action.payload
+          const updatedContactStatuss = { ...state.contactStatuss }
+          delete updatedContactStatuss[oldStatusName]
+          updatedContactStatuss[editStatusName] = updatedStatus
+
+          const updatedContacts = state.contacts.map(contact => 
+            contact.status === oldStatusName ? {...contact, status: editStatusName} : contact
+          )
+          return {
+            ...state,
+            contactStatuss: updatedContactStatuss,
+            contacts: updatedContacts
           }
         default:
             return state

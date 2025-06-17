@@ -1,57 +1,37 @@
-import './AddNewStatus.scss'
+import './EditStatus.scss'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useNavigate} from  'react-router'
+import { useNavigate, useParams} from  'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewStatus } from '../../../redux/action'
+import { editStatus } from '../../../redux/action'
 import { validationSchema } from '../../../Validation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
-function InfoModal({ show, onHide }) {
-  return (
-    <>
-      <Modal show={show} onHide={onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title><h3>Error</h3></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          This status already exists
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='cancelBtn' variant="secondary" onClick={onHide}>
-            Thank you
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-}
-
-export default function AddNewStatus() {
+export default function EditStatus() {
+    const { statusName } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const contactStatuss = useSelector(state => state.contactStatuss)
-    const [infoModalShow, setInfoModalShow] = useState(false);
 
-    const initialValues = {
+    const [initialValues, setinitialValues] = useState ({
         statusName: '',
         colorStatus: '#cdb4db',
-    }
+    })
 
-    const handleSubmit = (values, {setSubmitting}) => {
-        const statusName = values.statusName.trim();
-        if (Object.keys(contactStatuss).includes(statusName)) {
-            setInfoModalShow(true)
-            setSubmitting(false)
-            return
+    useEffect(() => {
+        if(contactStatuss && contactStatuss[statusName]){
+            setinitialValues({
+                statusName: statusName,
+                colorStatus:contactStatuss[statusName].bg
+            })
         }
+    }, [statusName, contactStatuss])
 
-        const newStatus = {
-            [values.statusName] : { count: 0, bg: values.colorStatus }
+    const handleSubmit = (values, { setSubmitting }) => {
+        const updatedStatus = {
+            count: contactStatuss[statusName].count, 
+            bg: values.colorStatus
         }
-        dispatch(addNewStatus(newStatus))
+        dispatch(editStatus(statusName, values.statusName, updatedStatus))
         setSubmitting(false)
         navigate('/contact-statuss')
     }
@@ -59,10 +39,10 @@ export default function AddNewStatus() {
     return(
         <div className="containerAddNewStatus">
             <div className="modal-content addPage">
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit} enableReinitialize={true}>
                     {({isSubmitting}) => (
                         <Form>
-                            <h1 className='title'>Add new contact status</h1>
+                            <h1 className='title'>Edit contact status</h1>
                             <div className="row">
                                 <div className='col-12'>
                                     <Field 
@@ -92,15 +72,11 @@ export default function AddNewStatus() {
                                     </div>
                                 </div>
                             </div>
-                            <button type='submit' className='addBtn' disabled={isSubmitting}>Add</button>
+                            <button type='submit' className='addBtn' disabled={isSubmitting}>Save</button>
                         </Form>
                     )}
                 </Formik>
             </div>
-            <InfoModal
-                show={infoModalShow}
-                onHide={() => setInfoModalShow(false)}
-            />
         </div>
     )
 }

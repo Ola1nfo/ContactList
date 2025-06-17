@@ -7,6 +7,7 @@ import{
     SET_FILTER,
     ADD_NEW_STATUS,
     DELETE_STATUS,
+    EDIT_STATUS
 
 } from './type'
 
@@ -63,5 +64,12 @@ export const deleteStatus = (status) => {
     return{
         type: DELETE_STATUS,
         payload: status
+    }
+}
+
+export const editStatus = (oldStatusName, editStatusName, updatedStatus) => {
+    return{
+        type: EDIT_STATUS,
+        payload: {oldStatusName, editStatusName, updatedStatus}
     }
 }

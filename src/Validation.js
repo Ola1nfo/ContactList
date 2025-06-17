@@ -9,3 +9,8 @@ export const contactValidationSchema = Yup.object().shape({
     status: Yup.string().required('Status is required'),
     favorite: Yup.boolean()
 })
+
+export const validationSchema = Yup.object({
+    statusName: Yup.string().required('Status name is required').min(2, 'Min 2 symbols'),
+    colorStatus: Yup.string().matches(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/, 'Must be a valid hex color').required('Color is required')
+})

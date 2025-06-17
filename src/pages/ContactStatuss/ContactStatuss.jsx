@@ -1,5 +1,5 @@
 import './ContactStatuss.scss';
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router"
 
@@ -7,11 +7,36 @@ import deleteIcon from './img/delete.png';
 import editIcon from './img/edit.png';
 import { deleteStatus } from '../../redux/action';
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+function DeleteModal({ show, onHide, onConfirm }) {
+  return (
+    <>
+      <Modal show={show} onHide={onHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Status</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this status?</Modal.Body>
+        <Modal.Footer>
+          <Button className='cancelBtn' variant="secondary" onClick={onHide}>
+            Cancel
+          </Button>
+          <Button className='deleteBtn' variant="danger" onClick={onConfirm}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
 
 export default function ContactStatuss() {
     const contactStatuss = useSelector(state => state.contactStatuss)
     const contacts = useSelector(state => state.contacts)
     const dispatch = useDispatch()
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [statusToShow, setStatusToShow] = useState(null);
 
     const statusCounts = useMemo(() => {
         const counts = {...contactStatuss}
@@ -23,8 +48,17 @@ export default function ContactStatuss() {
     }, [contacts, contactStatuss])
 
     const handleDeleteStatus = (status) => {
-        dispatch(deleteStatus(status))
+        setStatusToShow(status);
+        setDeleteModalShow(true);
     }
+
+    const handleConfirmDelete = () => {
+        if (statusToShow) {
+            dispatch(deleteStatus(statusToShow));
+            setDeleteModalShow(false);
+            setStatusToShow(null);
+        }
+    };
 
     return(
         <main className="container contactStatuss rounded bg-white shadow-lg">
@@ -52,7 +86,7 @@ export default function ContactStatuss() {
                                     <div className="btnGroup">
                                         <button className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
                                         </button> 
-                                        <Link to={`/edit-status/${status}`}>
+                                        <Link to={`/contact-statuss/edit-status/${status}`}>
                                         <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
                                         </Link>
                                     </div>
@@ -63,6 +97,13 @@ export default function ContactStatuss() {
                     </table>
                 </div>
             </div>
+
+            <DeleteModal
+                show={deleteModalShow}
+                onHide={() => setDeleteModalShow(false)}
+                onConfirm={handleConfirmDelete}
+            />
         </main>
+        
     )
 }
