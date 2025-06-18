@@ -95,7 +95,7 @@ export default function AddContact() {
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
                                         {Object.keys(contactStatuss).map((statusKey) => (
-                                            <option key={statusKey} value={statusKey}>
+                                            <option style={{background: contactStatuss[statusKey].bg}} key={statusKey} value={statusKey}>
                                                 {statusKey}
                                             </option>
                                         ))}

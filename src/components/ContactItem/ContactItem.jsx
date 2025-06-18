@@ -9,6 +9,7 @@ import deleteIcon from './img/delete.png';
 import editIcon from './img/edit.png';
 import heardFalse from '../../pages/AddContact/img/heafdFalse.png'
 import heardTrue from '../../pages/AddContact/img/heafdTrue.png'
+import phoneImg from './img/phone-call.png'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -50,7 +51,7 @@ function InfoModal({ show, onHide, contact }) {
               src={contact.gender === 'women' ? womenImg : menImg}
               alt=""
             />
-            <p>{contact.phone}</p>
+           <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
             <p>{contact.email}</p>
             <p>{contact.gender}</p>
             <p>{contact.status}</p>
@@ -113,9 +114,9 @@ export default function ContactItem() {
           </button>
           <div className="contactContent">
             <h3>{contact.firstName} {contact.lastName}</h3>
-            <p>{contact.phone}</p>
             <p>{contact.email}</p>
             <p>{contact.status}</p>
+            <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
             <div className="btnGroup">
               <button className="contactBtn" onClick={() => handleDeleteClick(contact)}><img className='deleteImg' src={deleteIcon} alt="Delete" />
               </button> 
