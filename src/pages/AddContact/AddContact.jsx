@@ -4,11 +4,14 @@ import { contactValidationSchema } from '../../Validation'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate} from  'react-router'
 import { IMaskInput } from 'react-imask'
+import ReactInputDateMask from 'react-input-date-mask'
 import { useSelector, useDispatch } from 'react-redux'
 import { addContact } from '../../redux/action'
 
 import heardFalse from './img/heafdFalse.png'
 import heardTrue from './img/heafdTrue.png'
+import viberImg from './img/viber.png'
+import telegramImg from './img/telegram.png'
 
 export default function AddContact() {
     const navigate = useNavigate()
@@ -77,6 +80,66 @@ export default function AddContact() {
                                     <Field type='text' name='email' id='email' placeholder='Enter your email' autoComplete="off"/>
                                     <div className="error-wrapper">
                                          <ErrorMessage name='email' component='p' className='error'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='mb-2 col-12 col-md-6'>
+                                    <label htmlFor="phoneViber"><img className='phoneImg' src={viberImg} alt="" /></label>
+                                    <Field name="phoneViber" >
+                                        {({ field, form }) => (
+                                            <IMaskInput
+                                            {...field}
+                                            mask="+{38} (000) 000-00-00"
+                                            definitions={{ '0': /[0-9]/ }}
+                                            unmask={false}
+                                            placeholder="+38 (0__) ___-__-__"
+                                            autoComplete="new-password"
+                                            onAccept={(value) => form.setFieldValue(field.name, value)}
+                                            id="phoneViber"
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='phoneViber' component='p' className='error'/>
+                                    </div>
+                                </div>
+                                <div className='mb-2 col-12 col-md-6'>
+                                    <label htmlFor="phoneTelegram"><img className='phoneImg' src={telegramImg} alt="" /></label>
+                                    <Field name="phoneTelegram" >
+                                        {({ field, form }) => (
+                                            <IMaskInput
+                                            {...field}
+                                            mask="+{38} (000) 000-00-00"
+                                            definitions={{ '0': /[0-9]/ }}
+                                            unmask={false}
+                                            placeholder="+38 (0__) ___-__-__"
+                                            autoComplete="new-password"
+                                            onAccept={(value) => form.setFieldValue(field.name, value)}
+                                            id="phoneTelegram"
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='phoneTelegram' component='p' className='error'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='col-12'>
+                                    <Field name="birthday">
+                                        {({ field }) => (
+                                            <ReactInputDateMask  
+                                            {...field}
+                                            mask="dd/mm/yyyy"
+                                            id="birthday"
+                                            className="birthday"
+                                            
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='birthday' component='p' className='error'/>
                                     </div>
                                 </div>
                             </div>

@@ -83,13 +83,15 @@ export default function ContactStatuss() {
                                 <td>{statusCounts[status].bg}</td>
                                 <td>{statusCounts[status].count}</td>
                                 <td>
-                                    <div className="btnGroup">
-                                        <button disabled="disabled" className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
+                                    {status !== 'others' && (
+                                      <div className="btnGroup">
+                                        <button className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
                                         </button> 
                                         <Link to={`/contact-statuss/edit-status/${status}`}>
                                         <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
                                         </Link>
-                                    </div>
+                                    </div>  
+                                    )}
                                 </td>
                             </tr>
                         ))}
