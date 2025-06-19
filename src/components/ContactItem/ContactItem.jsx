@@ -10,6 +10,10 @@ import editIcon from './img/edit.png';
 import heardFalse from '../../pages/AddContact/img/heafdFalse.png'
 import heardTrue from '../../pages/AddContact/img/heafdTrue.png'
 import phoneImg from './img/phone-call.png'
+import shareImg from './img/share.png'
+import telegramImg from './img/telegram.png'
+import viberImg from './img/viber.png'
+import gmailImg from './img/gmail.png'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -51,14 +55,13 @@ function InfoModal({ show, onHide, contact }) {
               src={contact.gender === 'women' ? womenImg : menImg}
               alt=""
             />
-           <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
+            <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
             <p>{contact.email}</p>
             <p>{contact.gender}</p>
             <p>{contact.status}</p>
             <p>{contact.favorite === true ? (<img className='imgFavorite' src={heardTrue} alt="Favorite" />) : (<img className='imgFavorite' src={heardFalse} alt="Not favorite"/>)}</p>
           </>
         )}
-        {!contact && <p>No contact selected.</p>}
         </Modal.Body>
         <Modal.Footer>
           <Button className='cancelBtn' variant="secondary" onClick={onHide}>
@@ -70,6 +73,34 @@ function InfoModal({ show, onHide, contact }) {
   );
 }
 
+function ShareContactModal(props) {
+  const { contact } = props;
+
+  if (!contact) return null
+
+  const shareText = `Контакт:${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email}`;
+  const encodedText = encodeURI(shareText);
+
+  return (
+    <Modal {...props}>
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter"> Share contact </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div>
+          <a href={`https://t.me/share/url?url=${encodedText}`}><img className='shareImgModal' src={telegramImg} alt="" /></a>
+          <a href={`viber://forward?text=${encodedText}`}><img className='shareImgModal' src={viberImg} alt="" /></a>
+          <a href={`mailto:?subject=Контакт ${contact.name}&body=${encodedText}`}><img className='shareImgModal' src={gmailImg} alt="" /></a>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide} className='cancelBtn' variant="secondary"> Close </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+
 export default function ContactItem() {
   const contacts = useSelector(state => state.contacts)
   const search = useSelector(state => state.search)
@@ -79,6 +110,11 @@ export default function ContactItem() {
   const [infoModalShow, setInfoModalShow] = useState(false);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [contactToShow, setContactToShow] = useState(null);
+  const [showModal, setShowModal] = useState(false)
+  const [contactToShare, setContactToShare] = useState(null);
+
+  const shareText = `Контакт: ${contacts.name} ${contacts.phone} ${contacts.email}`
+  const codedText = encodeURI(shareText)
 
   const filteredContacts = contacts.filter(contact => {
       const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true;
@@ -104,6 +140,11 @@ export default function ContactItem() {
     }
   };
 
+  const handleShareClick = (contact) => {
+    setContactToShare(contact);
+    setShowModal(true);
+  }
+
   return (
     <div className='containerBlock'>
       {filteredContacts.map(contact => (
@@ -116,7 +157,10 @@ export default function ContactItem() {
             <h3>{contact.firstName} {contact.lastName}</h3>
             <p>{contact.email}</p>
             <p>{contact.status}</p>
-            <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
+            <div className='btnGroup'>
+              <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
+              <p onClick={() => handleShareClick(contact)}><img className='shareImg' src={shareImg} alt="" /></p>
+            </div>
             <div className="btnGroup">
               <button className="contactBtn" onClick={() => handleDeleteClick(contact)}><img className='deleteImg' src={deleteIcon} alt="Delete" />
               </button> 
@@ -138,6 +182,12 @@ export default function ContactItem() {
         show={infoModalShow}
         onHide={() => setInfoModalShow(false)}
         contact={contactToShow}
+      />
+
+      <ShareContactModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        contact={contactToShare}
       />
     </div>
   );

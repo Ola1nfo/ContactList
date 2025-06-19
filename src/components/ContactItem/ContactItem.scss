@@ -50,6 +50,7 @@
 
       .phoneImg{
         width: 30px;
+        margin-right: 15px;
       
         &:hover{
           animation: shake 1.5s infinite;
@@ -65,23 +66,34 @@
         100% { transform: translate(0, 0); }
       }
 
+      .shareImg{
+        width: 32px;
+        margin-right: 10px;
+        cursor: pointer;
+
+        &:hover {
+          animation: pulse 0.5s ease;
+        }
+      }
+
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+      }
+
       .btnGroup {
         margin-top: 15px;
 
         .contactBtn {
-          display: inline-block;
           margin-right: 10px;
           padding: 0px;
-          background-color: #f3e8ff;
-          color: white;
-          font-weight: bold;
           border: none;
-          border-radius: 12px;
           cursor: pointer;
-          transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+          transition: transform 0.5s ease;
 
           &:hover {
-            transform: scale(1.05);
+            transform: scale(1.2);
           }
         }
 
@@ -222,10 +234,39 @@
   padding: 10px;
   font-size: 20px;
   font-family: Caveat-VariableFont;
+
+  .phoneImg{
+        width: 30px;
+        margin-bottom: 10px;
+      
+        &:hover{
+          animation: shake 1.5s infinite;
+        }
+      }
+      
+      @keyframes shake {
+        0% { transform: translate(0, 0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(2px, -2px); }
+        60% { transform: translate(-2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0, 0); }
+      }
 }
 
 .modal-footer {
   justify-content: center;
   background-color: #f3e8ff;
   font-family: Tagesschrift-Regular;
+}
+
+.shareImgModal{
+  width: 50px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
