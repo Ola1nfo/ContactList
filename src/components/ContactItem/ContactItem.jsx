@@ -174,19 +174,18 @@ export default function ContactItem() {
             {contact.favorite ? '♥' : '♡'}
           </button>
           <div className="contactContent">
-            <h3>{contact.firstName} {contact.lastName}</h3>
+            <h3>{contact.firstName}</h3>
+            <h3>{contact.lastName}</h3>
             <p>{contact.email}</p>
             <p>{contact.birthday}</p>
             <p>{contact.status}</p>
             <div className='btnGroup'>
               <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
               <p onClick={() => handleShareClick(contact)}><img className='shareImg' src={shareImg} alt="" /></p>
-            </div>
-            <div className="btnGroup">
               <button className="contactBtn" onClick={() => handleDeleteClick(contact)}><img className='deleteImg' src={deleteIcon} alt="Delete" />
               </button> 
               <Link to={`/edit-contact/${contact.id}`}>
-                <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
+                <button className="contactBtn"><img className='editImg' src={editIcon} alt="Edit" /></button>
               </Link>
             </div>
           </div>
