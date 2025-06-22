@@ -131,7 +131,8 @@ const intialState = {
       family: {count: 0, bg: '#d2a8e6'},
       private: {count: 0, bg: '#ffafcc'},
       friends: {count: 0, bg: '#ffd3e6'},
-      others: {count: 0, bg: '#e0cce7'}
+      others: {count: 0, bg: '#e0cce7'},
+      favorites: {count: 0, bg: '#f99'}
     }
 }
 

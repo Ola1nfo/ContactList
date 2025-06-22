@@ -11,10 +11,15 @@ export default function SideBar() {
     const filterStatus = useSelector(state => state.contactStatus)
     
     const filteredContacts = contacts.filter(contact => {
-        const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true;
-        const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-        return matchesSearch && matchesStatus;
-    });
+        const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true
+        let matchesStatus = true
+        if (filterStatus === 'favorites') {
+            matchesStatus = contact.favorite === true
+        } else if (filterStatus && filterStatus !== 'all') {
+            matchesStatus = contact.status === filterStatus
+        }
+        return matchesSearch && matchesStatus
+    })
    
     const totalContacts = filteredContacts.length
 
@@ -23,6 +28,7 @@ export default function SideBar() {
         Object.keys(counts).forEach(status => (counts[status].count = 0))
         filteredContacts.forEach(contact => {
             contactStatuss[contact.status].count++
+            if (contact.favorite === true && counts['favorites']) {counts['favorites'].count++}
         })
         return counts
     }, [filteredContacts, contactStatuss, search])
@@ -42,9 +48,13 @@ export default function SideBar() {
                         <div className="list fs-5">
                             {
                                 Object.keys(statusCounts).map(status => (
-                                    <div key={status} className={`listItem d-flex justify-content-between mb-3 ${status === filterStatus ? 'active' : ''}`} style={{backgroundColor: statusCounts[status].bg}} onClick={() => statusClick(status)}>
+                                    <div 
+                                    key={status} 
+                                    className={`listItem d-flex justify-content-between mb-3 ${status === filterStatus ? 'active' : ''}`} 
+                                    style={{backgroundColor: statusCounts[status].bg}} 
+                                    onClick={() => statusClick(status)}>
                                         <div className='statusWord'>
-                                            {status}
+                                            {status === 'favorites' ? 'Улюблені' : status}
                                         </div>
                                         <span className="fs-5">{statusCounts[status].count}</span>
                                     </div>

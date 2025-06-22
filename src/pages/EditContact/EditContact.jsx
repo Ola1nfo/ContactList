@@ -5,9 +5,12 @@ import { contactValidationSchema } from '../../Validation'
 import { IMaskInput } from 'react-imask'
 import { useSelector, useDispatch } from 'react-redux'
 import { editContact } from '../../redux/action'
+import ReactInputDateMask from 'react-input-date-mask'
 
 import heardFalse from '../AddContact/img/heafdFalse.png'
 import heardTrue from '../AddContact/img/heafdTrue.png'
+import viberImg from '../AddContact/img/viber.png'
+import telegramImg from '../AddContact/img/telegram.png'
 
 export default function EditContact() {
     const { id } = useParams()
@@ -24,13 +27,15 @@ export default function EditContact() {
         lastName: contact.lastName,
         phone: contact.phone,
         email: contact.email,
+        phoneViber: contact.phoneViber,
+        phoneTelegram: contact.phoneTelegram,
+        birthday: contact.birthday,
         gender: contact.gender,
         status: contact.status,
         favorite: contact.favorite
     }
 
     const handleSubmit = (values) => {
-        console.log(values);
         dispatch(editContact(values.id, values))
         navigate ('/')
     }
@@ -85,6 +90,67 @@ export default function EditContact() {
                             </div>
                             <div className="row">
                                 <div className='mb-2 col-12 col-md-6'>
+                                    <label htmlFor="phoneViber"><img className='phoneImg' src={viberImg} alt="" /></label>
+                                    <Field name="phoneViber" >
+                                        {({ field, form }) => (
+                                            <IMaskInput
+                                            {...field}
+                                            mask="+{38} (000) 000-00-00"
+                                            definitions={{ '0': /[0-9]/ }}
+                                            unmask={false}
+                                            placeholder="+38 (0__) ___-__-__"
+                                            autoComplete="new-password"
+                                            onAccept={(value) => form.setFieldValue(field.name, value)}
+                                            id="phoneViber"
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='phoneViber' component='p' className='error'/>
+                                    </div>
+                                </div>
+                                <div className='mb-2 col-12 col-md-6'>
+                                    <label htmlFor="phoneTelegram"><img className='phoneImg' src={telegramImg} alt="" /></label>
+                                    <Field name="phoneTelegram" >
+                                        {({ field, form }) => (
+                                            <IMaskInput
+                                            {...field}
+                                            mask="+{38} (000) 000-00-00"
+                                            definitions={{ '0': /[0-9]/ }}
+                                            unmask={false}
+                                            placeholder="+38 (0__) ___-__-__"
+                                            autoComplete="new-password"
+                                            onAccept={(value) => form.setFieldValue(field.name, value)}
+                                            id="phoneTelegram"
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                         <ErrorMessage name='phoneTelegram' component='p' className='error'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='col-12'>
+                                    <Field name="birthday">
+                                        {({ field, form }) => (
+                                            <ReactInputDateMask  
+                                            {...field}
+                                            mask="dd/mm/yyyy"
+                                            id="birthday"
+                                            className="birthday"
+                                            value={field.value}
+                                            onChange={(value) => form.setFieldValue(field.name, value)}
+                                            />
+                                        )}
+                                    </Field>
+                                    <div className="error-wrapper">
+                                        <ErrorMessage name='birthday' component='p' className='error'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className='mb-2 col-12 col-md-6'>
                                     <Field as='select' type='text' name='gender' id='gender'>
                                         <option value="">Choose gender</option>
                                         <option value="men">Men</option>
@@ -98,7 +164,7 @@ export default function EditContact() {
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
                                         {Object.keys(contactStatuss).map((statusKey) => (
-                                            <option key={statusKey} value={statusKey}>
+                                            <option style={{background: contactStatuss[statusKey].bg}} key={statusKey} value={statusKey}>
                                                 {statusKey}
                                             </option>
                                         ))}

@@ -41,6 +41,8 @@ function DeleteModal({ show, onHide, onConfirm }) {
 }
 
 function InfoModal({ show, onHide, contact }) {
+  const formatPhone = (number) => number ? number.replace(/\D/g, '') : ''
+
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -56,7 +58,20 @@ function InfoModal({ show, onHide, contact }) {
               alt=""
             />
             <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>
+            {contact.phoneViber && (
+              <a href={`viber://chat?number=%2B${formatPhone(contact.phoneViber)}`}>
+                <img className='phoneImg' src={viberImg} alt="Viber" />
+              </a>
+            )}
+            {contact.phoneTelegram && (
+              <a href={`tg://resolve?phone=${formatPhone(contact.phoneTelegram)}`}>
+                <img className='phoneImg' src={telegramImg} alt="Telegram" />
+              </a>
+            )}
             <p>{contact.email}</p>
+            {contact.birthday && (
+              <p>{contact.birthday}</p>
+            )}
             <p>{contact.gender}</p>
             <p>{contact.status}</p>
             <p>{contact.favorite === true ? (<img className='imgFavorite' src={heardTrue} alt="Favorite" />) : (<img className='imgFavorite' src={heardFalse} alt="Not favorite"/>)}</p>
@@ -117,10 +132,15 @@ export default function ContactItem() {
   const codedText = encodeURI(shareText)
 
   const filteredContacts = contacts.filter(contact => {
-      const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true;
-      const matchesStatus = filterStatus && filterStatus !== 'all' ? contact.status === filterStatus : true;
-      return matchesSearch && matchesStatus;
-  });
+      const matchesSearch = search ? (`${contact.firstName} ${contact.lastName} ${contact.phone} ${contact.email} ${contact.gender} ${contact.status}`).toLowerCase().includes(search.toLowerCase()) : true
+      let matchesStatus = true
+      if (filterStatus === 'favorites') {
+          matchesStatus = contact.favorite === true
+      } else if (filterStatus && filterStatus !== 'all') {
+          matchesStatus = contact.status === filterStatus
+      }
+      return matchesSearch && matchesStatus
+  })
   
   const handleDeleteClick = (contact) => {
     setContactToShow(contact);
@@ -156,6 +176,7 @@ export default function ContactItem() {
           <div className="contactContent">
             <h3>{contact.firstName} {contact.lastName}</h3>
             <p>{contact.email}</p>
+            <p>{contact.birthday}</p>
             <p>{contact.status}</p>
             <div className='btnGroup'>
               <a href={`tel:${contact.phone}`}><img className='phoneImg' src={phoneImg} alt="" /></a>

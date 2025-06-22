@@ -24,13 +24,15 @@ export default function AddContact() {
         lastName: '',
         phone: '',
         email: '',
+        phoneViber: '',
+        phoneTelegram: '',
+        birthday: '',
         gender: '',
         status: '',
         favorite: ''
     }
 
     const handleSubmit = (values) => {
-        console.log(values);
         dispatch(addContact(values))
         navigate ('/')
     }
@@ -128,13 +130,14 @@ export default function AddContact() {
                             <div className="row">
                                 <div className='col-12'>
                                     <Field name="birthday">
-                                        {({ field }) => (
+                                        {({ field, form }) => (
                                             <ReactInputDateMask  
                                             {...field}
                                             mask="dd/mm/yyyy"
                                             id="birthday"
                                             className="birthday"
-                                            
+                                            value={field.value}
+                                            onChange={(value) => form.setFieldValue(field.name, value)}
                                             />
                                         )}
                                     </Field>

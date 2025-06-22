@@ -12,8 +12,8 @@
     .addPage{
         background-color: #f3e8ff;
         color: #2d334a;
-        width: 550px;
-        height: 550px;
+        width: 650px;
+        height: 650px;
         border-radius: 50%;
         margin: 10px auto;
         display: flex;
@@ -31,7 +31,8 @@
         }
     
         #firstName, #lastName, #phone, #email,
-        #avatar, #gender, #status{
+        #avatar, #gender, #status, #phoneViber,
+        #phoneTelegram, .birthday{
             border-radius: 10px;
             border: 2px solid #cdb4db;
             background-color: #fff;
@@ -41,13 +42,10 @@
             font-size: 18px;
         }
 
-        #firstName:focus,
-        #lastName:focus,
-        #phone:focus,
-        #email:focus,
-        #avatar:focus,
-        #gender:focus,
-        #status:focus {
+        #firstName:focus, #lastName:focus, #phone:focus,
+        #email:focus, #avatar:focus, #gender:focus,
+        #status:focus, #phoneViber, #phoneTelegram,
+        .birthday {
             border-color: #ffc8dd;
             outline: none;
             box-shadow: 0 0 8px rgba(255, 200, 221, 0.5);
@@ -78,7 +76,12 @@
         }
 
         label{
-            display: block;
+            display: inline-block;
+            margin-right: 5px;
+
+            .phoneImg{
+                width: 30px;
+            }
         }
 
         option{
