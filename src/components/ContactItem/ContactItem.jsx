@@ -64,7 +64,7 @@ function InfoModal({ show, onHide, contact }) {
               </a>
             )}
             {contact.phoneTelegram && (
-              <a href={`tg://resolve?phone=${formatPhone(contact.phoneTelegram)}`}>
+              <a href={`https://t.me/+${formatPhone(contact.phoneTelegram)}`}>
                 <img className='phoneImg' src={telegramImg} alt="Telegram" />
               </a>
             )}
