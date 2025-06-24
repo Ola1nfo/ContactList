@@ -76,25 +76,27 @@ export default function ContactStatuss() {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(statusCounts).map((status, index) => (
+                        {Object.keys(statusCounts)
+                        .filter(status => status !== 'favorites')
+                        .map((status, index) => (
                             <tr key={index} style={{backgroundColor: statusCounts[status].bg}}>
                                 <td scope="row">{++index}</td>
                                 <td className="statusName">{status}</td>
                                 <td>{statusCounts[status].bg}</td>
                                 <td>{statusCounts[status].count}</td>
                                 <td>
-                                    {status !== 'others' && (
-                                      <div className="btnGroup">
-                                        <button className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
-                                        </button> 
-                                        <Link to={`/contact-statuss/edit-status/${status}`}>
-                                        <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
-                                        </Link>
+                                  {status !== 'others' &&(
+                                    <div className="btnGroup">
+                                      <button className="contactBtn" onClick={() => {handleDeleteStatus(status)}}><img className='deleteImg' src={deleteIcon} alt="Delete" />
+                                      </button> 
+                                      <Link to={`/contact-statuss/edit-status/${status}`}>
+                                      <button className="contactBtn"><img className='deleteImg' src={editIcon} alt="Edit" /></button>
+                                      </Link>
                                     </div>  
-                                    )}
+                                  )}
                                 </td>
                             </tr>
-                        ))}
+                          ))}
                         </tbody>
                     </table>
                 </div>

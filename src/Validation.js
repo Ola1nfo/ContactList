@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 export const contactValidationSchema = Yup.object().shape({
     firstName: Yup.string().required('First Name is required').min(2, 'Min 2 symbols').max(10, 'Max 10 symbols'),
     lastName: Yup.string().required('Last Name is required').min(2, 'Min 2 symbols').max(15, 'Max 15 symbols'),
-    birthday: Yup.date().nullable(),
+    birthday: Yup.string().matches(/^\d{2}\.\d{2}\.\d{4}$/, 'Формат має бути дд.мм.рррр'),
     phone: Yup.string().required('Phone is required').min(19, 'More symbols'),
     phoneViber: Yup.string().min(19, 'More symbols'),
     phoneTelegram: Yup.string().min(19, 'More symbols'),

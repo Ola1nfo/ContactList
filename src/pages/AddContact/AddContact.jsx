@@ -133,7 +133,7 @@ export default function AddContact() {
                                         {({ field, form }) => (
                                             <ReactInputDateMask  
                                             {...field}
-                                            mask="dd/mm/yyyy"
+                                            mask="dd.mm.yyyy"
                                             id="birthday"
                                             className="birthday"
                                             value={field.value}
