@@ -163,7 +163,9 @@ export default function EditContact() {
                                 <div className='mb-2 col-12 col-md-6'>
                                     <Field as='select' name='status' id='status'>
                                         <option value="">Choose status</option>
-                                        {Object.keys(contactStatuss).map((statusKey) => (
+                                        {Object.keys(contactStatuss)
+                                        .filter(statusKey => statusKey !== 'favorites')
+                                        .map((statusKey) => (
                                             <option style={{background: contactStatuss[statusKey].bg}} key={statusKey} value={statusKey}>
                                                 {statusKey}
                                             </option>

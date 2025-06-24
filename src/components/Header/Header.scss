@@ -12,6 +12,12 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  .container-fluid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .navbar-menu {
@@ -45,7 +51,6 @@
     border: 2px solid #cdb4db;
     background-color: #fff;
     padding: 5px;
-    padding-right: 50px;
     font-family: Tagesschrift-Regular;
 }
 

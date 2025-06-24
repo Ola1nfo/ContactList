@@ -25,8 +25,8 @@ export default function Header() {
                                Statuss
                             </Link>
                            </div>
-                            <form className="d-flex" role="search">
-                                <input value={searchContact} onInput={e => dispatch(search(e.target.value))} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <form role="search">
+                                <input value={searchContact} onInput={e => dispatch(search(e.target.value))} className="form-control" type="search" placeholder="Search" aria-label="Search"/>
                             </form>
                         </div>
                     </nav>

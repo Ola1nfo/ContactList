@@ -98,6 +98,7 @@
             }
             
             .deleteImg{
+                margin-top: -15px;
                 width: 35px;
             }
         }
@@ -113,6 +114,18 @@
 
             td {
                 font-size: 15px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px){
+    .contactStatuss{
+        .tableStatus{
+            .btnGroup{
+                .deleteImg{
+                    width: 25px;
+                }
             }
         }
     }
