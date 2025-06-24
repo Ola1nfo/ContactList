@@ -67,13 +67,7 @@ export default function ContactStatuss() {
                     <Link to={'/contact-statuss/add-new-status'} className='addBtn'>Add + </Link>
                     <table className="tableStatus">
                         <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Status name</th>
-                            <th>Color</th>
-                            <th>Contact count</th>
-                            <th>Edit/Delete</th>
-                            </tr>
+                            
                         </thead>
                         <tbody>
                         {Object.keys(statusCounts)
