@@ -1,3 +1,4 @@
+import './ContactList.scss'
 import ContactItem from "../../components/ContactItem/ContactItem"
 import SideBar from "../../components/SideBar/SideBar"
 
